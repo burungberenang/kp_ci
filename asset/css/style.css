@@ -1,0 +1,134 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 30, 2014, 6:24:53 PM
+    Author     : Denny
+*/
+
+body{
+    padding-bottom: 0px;
+}
+
+.gambar{
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
+}
+.logo{
+    margin: 0 auto;
+    width: 162px;
+    height: 162px;
+}
+
+.footer{
+    margin-top: 20px;
+    height: auto;
+}
+
+.footer div{
+    padding: 5px;
+}
+
+.konten{
+    min-height: 350px;
+}
+
+.dropdown-menu .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+i.glyphicon-arrow-right{
+    position: absolute;
+    left: 80%;
+    top:30%;
+}
+
+.navigasi{
+    position: fixed;
+    top:0px;
+    background-color: white;
+    z-index: 101;
+}
+
+.navigasi-shadow{
+    position: relative;
+    height: 55px;
+    background-color: white;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color:silver;
+}
+
+.nav li a{
+    color:black;
+}
+
+.nav li a:hover{
+    color:black;
+}
+
+@media (min-width: 992px) {
+    .navigasi{
+        height: 55px;
+        top:0px;
+        background-color: black;
+        z-index: 100;
+    }
+    
+    .nav li a{
+        color:silver;
+    }
+
+    .nav li a:hover{
+        color:black;
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: black;
+        color:silver;
+    }
+    
+    .affix{
+        position: fixed;
+    }
+
+    .affix-bottom{
+        position: absolute;
+    }
+    
+    .nav-affix{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.sub-judul{
+    text-align: center;
+}
+
+.footer-caption{
+    display: block;
+    border-bottom: 1px solid wheat;
+}

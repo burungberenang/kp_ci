@@ -2,58 +2,58 @@
 
 class Home extends CI_Controller {
 	function __construct() {
-		parent::__construct();
-		$this->load->helper('url');
-		$this->load->library('form_validation');
-		$this->load->library('session');
-		$this->load->model('front_model');
+            parent::__construct();
+            $this->load->helper('url');
+            $this->load->library('form_validation');
+            $this->load->library('session');
+            $this->load->model('front_model');
 	}
 
 	public function index()
 	{
-		$data['title']="Home - A+ Learning";
-		$this->load->view('front/f_header',$data);
-		$this->load->view('front/f_home');
-		$this->load->view('front/f_footer');
+            $data['title']="Home - A+ Learning";
+            $this->load->view('front/f_header',$data);
+            $this->load->view('front/f_home');
+            $this->load->view('front/f_footer');
 	}
 
 	public function info()
 	{
-		$data['title']="Info - A+ Learning";
-		$this->load->view('front/f_header',$data);
-		$this->load->view('front/f_info');
-		$this->load->view('front/f_footer');
+            $data['title']="Info - A+ Learning";
+            $this->load->view('front/f_header',$data);
+            $this->load->view('front/f_info');
+            $this->load->view('front/f_footer');
 	}
 
 	public function login()
 	{
-		if($this->session->userdata('userf')){
-			redirect('home');
-		}else{
-			$data['title']="Home - A+ Learning";
-			$this->load->view('front/f_header',$data);
-			$this->load->view('front/f_login_user');
-			$this->load->view('front/f_footer');
-		}
+            if($this->session->userdata('userf')){
+                    redirect('home');
+            }else{
+                    $data['title']="Home - A+ Learning";
+                    $this->load->view('front/f_header',$data);
+                    $this->load->view('front/f_login_user');
+                    $this->load->view('front/f_footer');
+            }
 	}
 
 	public function register()
 	{
-		if($this->session->userdata('userf')){
-			redirect('home');
-		}else{
-			if($this->input->post('daftar')){
-				$this->form_validation->set_rules('password', 'Password Confirmation', 'matches[repassword]');
-				$this->form_validation->set_message('matches', 'Password tidak cocok');
-				if($this->form_validation->run()){
-					$data['sukses']=true;
-				}
-			}
-			$data['title']="Home - A+ Learning";
-			$this->load->view('front/f_header',$data);
-			$this->load->view('front/f_register_user');
-			$this->load->view('front/f_footer');
-		}
+            if($this->session->userdata('userf')){
+                    redirect('home');
+            }else{
+                    if($this->input->post('daftar')){
+                            $this->form_validation->set_rules('password', 'Password Confirmation', 'matches[repassword]');
+                            $this->form_validation->set_message('matches', 'Password tidak cocok');
+                            if($this->form_validation->run()){
+                                    $data['sukses']=true;
+                            }
+                    }
+                    $data['title']="Home - A+ Learning";
+                    $this->load->view('front/f_header',$data);
+                    $this->load->view('front/f_register_user');
+                    $this->load->view('front/f_footer');
+            }
 	}
 
     //----------------------------------------Cek Login------------------------------------------------------

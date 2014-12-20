@@ -41,8 +41,9 @@ class Home extends CI_Controller {
     {
         if($this->session->userdata('userf')&&$materi!=NULL){
             $data['title']="Materi - A+ Learning";
+            $data['idKelas']=$materi;
             $this->load->view('front/f_header',$data);
-            $this->load->view('front/f_info');
+            $this->load->view('front/f_materi',$data);
             $this->load->view('front/f_footer');
         } else {
             redirect('home');

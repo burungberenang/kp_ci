@@ -36,17 +36,29 @@ class Home extends CI_Controller {
             $this->load->view('front/f_footer');
         }
     }
+    
+    public function materi($materi)
+    {
+        if($this->session->userdata('userf')&&$materi!=NULL){
+            $data['title']="Materi - A+ Learning";
+            $this->load->view('front/f_header',$data);
+            $this->load->view('front/f_info');
+            $this->load->view('front/f_footer');
+        } else {
+            redirect('home');
+        }
+    }
 
     public function register()
     {
         if($this->session->userdata('userf')){
-                redirect('home');
+            redirect('home');
         }else{
             if($this->input->post('daftar')){
                 $this->form_validation->set_rules('password', 'Password Confirmation', 'matches[repassword]');
                 $this->form_validation->set_message('matches', 'Password tidak cocok');
                 if($this->form_validation->run()){
-                        $data['sukses']=true;
+                    $data['sukses']=true;
                 }
             }
             $data['title']="Home - A+ Learning";
@@ -68,7 +80,7 @@ class Home extends CI_Controller {
     	}else{
             ?>
     		<script type="text/javascript">alert("Username atau Password Salah");</script>
-    		<?php
+            <?php
             redirect('home/login', 'refresh');
     	}
     }

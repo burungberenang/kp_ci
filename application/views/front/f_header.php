@@ -27,13 +27,13 @@
                             <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Materi <span class="caret"></span></a>
                               <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">SMP Kelas VII</a></li>
-                                <li><a href="#">SMP Kelas VIII</a></li>
-                                <li><a href="#">SMP Kelas IX</a></li>
+                                  <li><a href="<?php echo base_url(); ?>index.php/home/materi/1">SMP Kelas VII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/home/materi/2">SMP Kelas VIII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/home/materi/3">SMP Kelas IX</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">SMA Kelas X</a></li>
-                                <li><a href="#">SMA Kelas XI</a></li>
-                                <li><a href="#">SMA Kelas XII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/home/materi/4">SMA Kelas X</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/home/materi/5">SMA Kelas XI</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/home/materi/6">SMA Kelas XII</a></li>
                               </ul>
                             </li>
                         </ul>

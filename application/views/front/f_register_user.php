@@ -1,9 +1,12 @@
 
             <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 konten" style="padding:20px;">
-                <form class="form-horizontal" role="form" method="post" action="<?php echo current_url(); ?>">
+                <form class="form-horizontal" role="form" method="post" action="<?php echo site_url(); ?>/">
                   <?php if(validation_errors()) echo '<div class="alert alert-danger" role="alert">'.validation_errors().'</div>'; ?>
 				  <?php if(isset($sukses)) echo '<div class="alert alert-success" role="alert">Pendaftaran telah berhasil dilakukan</div>'; ?>
-				  <div class="form-group">
+				  
+                                <?php $attributes = array('class' => 'form-horizontal'); 
+                                echo form_open("daftar/tambahuser",$attributes); ?>
+                                  <div class="form-group">
 				    <label class="col-sm-2 control-label">Nama Lengkap</label>
 				    <div class="col-sm-10">
 				      <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>

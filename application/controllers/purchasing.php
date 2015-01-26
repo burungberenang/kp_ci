@@ -29,4 +29,23 @@ class Purchasing extends CI_Controller {
         }
         
     }
+    
+    function lihatPaket(){
+        if($this->session->userdata('user')==null)
+        {
+            $user=explode("|",$this->session->userdata('user'));
+            $data['title']='Lihat Paket A+ Learning';
+            $data['title2']='Lihat Paket';
+            $data['user']=$user[0];
+            
+            $data['pilihan']=$this->model_purchasing->ambil_paket();
+            
+            $this->load->view('back/b_header',$data);
+            $this->load->view('back/b_lihat_paket',$data);
+            $this->load->view('back/b_footer',$data);
+        } else {
+            redirect('login', 'refresh');
+        }
+        
+    }
 }

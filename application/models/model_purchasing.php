@@ -13,6 +13,11 @@ Class Model_purchasing extends CI_Model
         return $result->result_array();
     }
     
+    function ambil_paket(){
+        $result = $this->db->query("SELECT * FROM paket");
+        return $result->result_array();
+    }
+    
     function tambah_materi($nama, $nominal, $masa, $materi){
         $this->db->query("INSERT INTO paket(nama, nominal, masaBerlaku, idMateri) VALUES('".$nama."', ".$nominal.", ".$masa.", ".$materi.")");
     }

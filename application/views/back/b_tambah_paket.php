@@ -26,7 +26,7 @@
                                         <input class="form-control" type="text" placeholder="Masa berlaku" name="masa">
                                     </div>
                                     <div class="input-group">
-                                        <input type="submit" class="btn btn-default" name="simpan" value="Simpan" />
+                                        <input type="submit" class="btn btn-primary" name="simpan" value="Simpan" />
                                         <input type="submit" class="btn btn-default" name="kembali" value="Kembali" />
                                     </div>
                                 </form>

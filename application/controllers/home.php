@@ -16,5 +16,56 @@ class Home extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->library('session');
+    }
+    
+    function index(){
+        $data['title']="Beranda - A+ Learning Guidance";
+        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_home');
+        $this->load->view('front/f_footer');
+    }
+    
+    function info(){
+        $data['title']="Info - A+ Learning Guidance";
+        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_info');
+        $this->load->view('front/f_footer');
+    }
+    
+    function masuk(){
+        $data['title']="Masuk - A+ Learning Guidance";
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        
+        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_login_user');
+        $this->load->view('front/f_footer');        
+    }
+    
+    function daftar(){
+        $data['title']="Daftar - A+ Learning Guidance";
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        
+        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_register_user');
+        $this->load->view('front/f_footer');
+    }
+    
+    function logincheck(){
+        $this->load->model('model_member');
+        if ($this->model_member->checkmember())
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    function logout(){
+        
     }
 }

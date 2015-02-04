@@ -38,9 +38,11 @@
 |
 */
 
-$route['default_controller'] = "front";
+$route['default_controller'] = "home";
 $route['404_override'] = '';
-
+$route['info']='home/info';
+$route['daftar']='home/daftar';
+$route['masuk']='home/masuk';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -43,8 +43,8 @@ class OneStop extends CI_Controller {
         $pass=$this->input->post('password');
     	$hasil = $this->back_model->cek_login($user,$pass);
     	if(count($hasil)>0){
-    		$this->session->set_userdata('user',$hasil['id'].'|'.$hasil['nama']);
-    		redirect('onestop');
+            $this->session->set_userdata('user',$hasil['id'].'|'.$hasil['nama']);
+            redirect('onestop');
     	}else{
             ?>
     		<script type="text/javascript">alert("Username atau Password Salah");</script>

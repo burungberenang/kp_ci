@@ -1,4 +1,5 @@
-<div class="row">
+        </div>
+        <div class="row">
             <div id="footer" class="col-12">
                 2014 &copy; A+ Learning Guidance Admin. Credits to <a href="#">Unicord Admin Template</a>
             </div>

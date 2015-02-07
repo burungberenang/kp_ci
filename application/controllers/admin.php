@@ -66,6 +66,7 @@ class Admin extends CI_Controller {
                 $this->session->set_userdata($loginarray);
                 
                 // redirect to contact page + notification
+                $this->session->set_flashdata('home',true);
                 redirect('/guidance/home', 'location');
                 
             }
@@ -105,6 +106,7 @@ class Admin extends CI_Controller {
     
     function halaman_backend(){
         $data['title']="Beranda - A+ Learning Guidance";
+        $this->session->set_flashdata('home',true);
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_backend');

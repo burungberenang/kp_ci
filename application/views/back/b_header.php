@@ -38,36 +38,33 @@
         </div>
 
         <div id="sidebar">
-            <!--<a href="#" class="hide"><i class="glyphicon glyphicon-home"></i> Dashboard</a>-->
             <ul>
-                <li class="active"><a href="index.html"><i class="glyphicon glyphicon-home"></i> <span>Dashboard</span></a></li>
+                <li <?php if ($this->session->flashdata('home')) { echo "class='active'"; }?>><a href="index.html"><i class="glyphicon glyphicon-home"></i> <span>Dasbor</span></a></li>
                 <li class="submenu">
-                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
+                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Materi</span><span class="caret"></span></a>
                     <ul>
-                        <li><a href="form-common.html">Common elements</a></li>
-                        <li><a href="form-validation.html">Validation</a></li>
-                        <li><a href="form-wizard.html">Wizard</a></li>
+                        <li><a href="form-common.html">Lihat Materi</a></li>
+                        <li><a href="form-validation.html">Tambah Materi</a></li>
+                        <li><a href="form-wizard.html">Ubah Materi</a></li>
                     </ul>
                 </li>
-                <li><a href="buttons.html"><i class="glyphicon glyphicon-tint"></i> <span>Buttons &amp; icons</span></a></li>
-                <li><a href="interface.html"><i class="glyphicon glyphicon-pencil"></i> <span>Interface elements</span></a></li>
-                <li><a href="tables.html"><i class="glyphicon glyphicon-th"></i> <span>Tables</span></a></li>
-                <li><a href="grid.html"><i class="glyphicon glyphicon-th-list"></i> <span>Grid Layout</span></a></li>
-                <li class="submenu">
-                    <a href="#"><i class="glyphicon glyphicon-file"></i> <span>Sample pages</span> <span class="label">4</span></a>
+                <li class="submenu" <?php if ($this->session->flashdata('paket')) { echo "class='active'"; }?>>
+                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Paket</span><span class="caret"></span></a>
                     <ul>
-                        <li><a href="invoice.html">Invoice</a></li>
-                        <li><a href="chat.html">Support chat</a></li>
-                        <li><a href="calendar.html">Calendar</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="form-common.html">Lihat Paket</a></li>
+                        <li><a href="form-validation.html">Tambah Paket</a></li>
+                        <li><a href="form-wizard.html">Ubah Paket</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="charts.html"><i class="glyphicon glyphicon-signal"></i> <span>Charts &amp; graphs</span></a>
+                <li class="submenu" <?php if ($this->session->flashdata('pengajar')) { echo "class='active'"; }?>>
+                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Pengajar</span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="form-common.html">Lihat Pengajar</a></li>
+                        <li><a href="form-validation.html">Tambah Pengajar</a></li>
+                        <li><a href="form-wizard.html">Ubah Pengajar</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="widgets.html"><i class="glyphicon glyphicon-inbox"></i> <span>Widgets</span></a>
-                </li>
+                <li <?php if ($this->session->flashdata('transaksi')) { echo "class='active'"; }?>><a href="buttons.html"><i class="glyphicon glyphicon-tint"></i> <span>Transaksi</span></a></li>
             </ul>
 
         </div>

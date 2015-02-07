@@ -44,7 +44,8 @@ class Member extends CI_Controller {
                 $loginarray = array(
                     'username' => $logincheck->username,
                     'name' => $logincheck->nama,
-                    'lastlogin' => $logincheck->lastlogin
+                    'lastlogin' => $logincheck->lastlogin,
+                    'role' => '1' // 0 admin, 1 member, 2,3 dst menyusul
                 );
                 $this->session->set_userdata($loginarray);
                 
@@ -136,12 +137,4 @@ class Member extends CI_Controller {
 	} 
     }
     
-    function login(){
-        if($this->session->userdata('user')!=null){
-            redirect('onestop', 'refresh');
-        }else{
-            $data['title']="Login";
-            $this->load->view('back/b_login',$data);
-        }
-    }
 }

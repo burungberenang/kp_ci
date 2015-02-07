@@ -7,11 +7,11 @@
  */
 
 /**
- * Description of member
+ * Description of model_admin
  *
  * @author Ryannathan
  */
-class Model_member extends CI_Model {
+class Model_admin extends CI_Model {
 
     function  __construct(){
         parent::__construct();
@@ -20,8 +20,9 @@ class Model_member extends CI_Model {
     //------------------------------------------------------------------------
     // Authentication
     //------------------------------------------------------------------------
-    function checkmember($username,$password){
-        $sql = "SELECT * FROM member "
+    // cek login karyawan
+    function checkkaryawan($username,$password){
+        $sql = "SELECT username, nama, jabatan, foto FROM karyawan "
                 . " WHERE username=? AND "
                 . " password=?";
         
@@ -38,17 +39,7 @@ class Model_member extends CI_Model {
         {
             return false;
         }
-        
     }
-    
-    function updatelastlogin($username){
-        $sql = "UPDATE member "
-                . " set lastlogin=? "
-                . " WHERE username=?";
-        
-        $this->db->query($sql, array(time(),$username));
-    }
-    //------------------------------------------------------------------------
     
     //------------------------------------------------------------------------
     // User Registration
@@ -56,8 +47,8 @@ class Model_member extends CI_Model {
     // return username_invalid if username registered
     // return connection_error if transaction failed
     // return success if it's success
-    function registeruser($email,$username,$password,$name){
-        $sql = "INSERT INTO member (nama,email,username,password) "
+    function registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto){
+        $sql = "INSERT INTO karyawan (username,password,noKTP,nama,alamat,tglLahir,jabatan,foto) "
                 . " VALUES (?,?,?,?)";
         
         $this->load->database('default');
@@ -82,14 +73,12 @@ class Model_member extends CI_Model {
             $this->db->close();
             return "success";
         }
-        
-        
     }
     
     // return true and false depends on the username records.
     // true if there is no username in the table and vice versa.
     function checkusername($username){
-        $sql = "SELECT * FROM member"
+        $sql = "SELECT * FROM karyawan"
                 . " WHERE username=?";
         
         if ($this->db->query($sql,array($username))->num_rows() > 0)
@@ -101,5 +90,6 @@ class Model_member extends CI_Model {
             return true;
         }
     }
-    //------------------------------------------------------------------------
+    
+    
 }

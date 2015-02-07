@@ -71,11 +71,4 @@
             </ul>
 
         </div>
-        <div id="content">
-            <div id="content-header">
-                <h1><?php echo $title2;?></h1>
-            </div>
-            <div id="breadcrumb">
-                <a href="#" title="Go to Home" class="tip-bottom"><i class="glyphicon glyphicon-home"></i> Home</a>
-                <a href="#" class="current">Dashboard</a>
-            </div>
+            

@@ -43,6 +43,8 @@ $route['404_override'] = '';
 $route['info']='home/info';
 $route['daftar']='home/daftar';
 $route['masuk']='home/masuk';
+$route['guidance/login']='admin/halaman_login';
+$route['guidance/home']='admin/halaman_backend';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

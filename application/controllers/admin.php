@@ -20,6 +20,12 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
     }
     
+    function logout(){
+        $this->session->sess_destroy();
+        
+        redirect('/guidance/login', 'location');
+    }
+    
     function halaman_login(){
         $data['title'] = "Masuk - A+ Learning Guidance";
         $this->load->library('form_validation');
@@ -61,7 +67,7 @@ class Admin extends CI_Controller {
                     'username' => $logincheck->username,
                     'name' => $logincheck->nama,
                     'lastlogin' => $logincheck->lastlogin,
-                    'role' => '0' // 0 admin, 1 member, 2,3 dst menyusul
+                    'role' => '1' // 1 admin, 2 member, 3,4 dst menyusul
                 );
                 $this->session->set_userdata($loginarray);
                 
@@ -85,8 +91,108 @@ class Admin extends CI_Controller {
 	} 
     }
     
+    function halaman_tambahpembimbing(){
+        $data['title']="Tambah Pembimbing - A+ Learning Guidance";
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_tambah_pembimbing');
+        $this->load->view('back/b_footer'); 
+    }
+    
+    function tambahpembimbing(){
+        //load model
+        $this->load->model('model_admin');
+        
+        //set validation rules and message
+        $this->form_validation->set_rules('username', 'Username', 'required');
+	$this->form_validation->set_rules('password', 'Password', 'required|matches[confpass]');
+        $this->form_validation->set_rules('confpass', 'Ulang Password', 'required');
+        $this->form_validation->set_rules('noKTP', 'Nomor KTP', 'required|numeric');
+	$this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        //$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+        //$this->form_validation->set_rules('noHP', 'Nomor HP', 'required');
+        
+        $this->form_validation->set_message('required','%s harus diisi.');
+        $this->form_validation->set_message('numeric','%s harus dalam angka (0-9)');
+        $this->form_validation->set_message('valid_email','Masukkan alamat e-mail Anda');
+        $this->form_validation->set_message('matches[confpass]','Ulang Password tidak sesuai dengan password Anda.');
+
+        //do something here
+	if ($this->form_validation->run() == FALSE)
+	{
+            $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>", "</strong> "
+                        . "</div>");
+            $this->session->set_flashdata('warning',validation_errors());
+            redirect('/guidance/pembimbing/tambah', 'location');
+	}
+        else
+	{
+            // insert database, etc
+            $username = $this->input->post('email');
+            $password = $this->input->post('pass');
+            $noKTP = $this->input->post('name');
+            $nama = $this->input->post('phone');
+            $alamat = $this->input->post('role');
+            $tglLahir = $this->input->post('role');;
+            $jabatan = $this->input->post('role');;
+            $linkfoto = $this->input->post('role');;
+            
+            if (!$this->md_admin->checkemail($data['email']))
+            {
+                if ($this->md_admin->adduser($data['email'], $data['pass'], $data['name'], $data['phone'], $data['role']))
+                {
+                    // redirect to contact page + notification
+                    $data['warning'] = "success";
+                    $this->load->view('admin/vd_header.php',$data);
+                    $this->load->view('admin/vd_adduser.php',$data);
+                    $this->load->view('admin/vd_footer.php',$data);
+                }
+                else
+                {
+                    $data['warning'] = "connectionfailed";
+                    $this->load->view('admin/vd_header.php',$data);
+                    $this->load->view('admin/vd_adduser.php',$data);
+                    $this->load->view('admin/vd_footer.php',$data);
+                }
+            }
+            else
+            {
+                $data['warning'] = "duplicateemail";
+                $this->load->view('admin/vd_header.php',$data);
+                $this->load->view('admin/vd_adduser.php',$data);
+                $this->load->view('admin/vd_footer.php',$data);
+            }
+        }
+    }
+    
+    function halaman_lihatpembimbing(){
+        $data['title']="Daftar Pembimbing - A+ Learning Guidance";
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_lihat_pembimbing');
+        $this->load->view('back/b_footer'); 
+    }
+    
+    function halaman_editpembimbing(){
+        
+    }
+    
+    function editpembimbing(){
+        
+    }
+    
+    
     function halaman_tambahadmin(){
-        $data['title']="Tambah Karyawan - A+ Learning Guidance";
+        $data['title']="Tambah Administrator - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
         
@@ -105,12 +211,30 @@ class Admin extends CI_Controller {
     }
     
     function halaman_backend(){
-        $data['title']="Beranda - A+ Learning Guidance";
-        $this->session->set_flashdata('home',true);
         
-        $this->load->view('back/b_header',$data);
-        $this->load->view('back/b_backend');
-        $this->load->view('back/b_footer');  
+        $data['title']="Beranda - A+ Learning Guidance";
+        
+        if (!$this->session->userdata('role')) // not set
+        {
+            $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Lakukan proses login dahulu.</strong> "
+                        . "</div>";
+            $this->session->set_flashdata('warning',$warning);
+            redirect('/guidance/login', 'location'); 
+        }
+        else if ($this->session->userdata('role') != '2') // not normal member
+        {
+            $this->session->set_flashdata('home',true);     
+            $this->load->view('back/b_header',$data);
+            $this->load->view('back/b_backend');
+            $this->load->view('back/b_footer'); 
+        }
+        else // member
+        {
+            redirect('/home','location');
+        }
     }
         
 }

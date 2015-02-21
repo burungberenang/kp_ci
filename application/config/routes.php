@@ -44,7 +44,14 @@ $route['info']='home/info';
 $route['daftar']='home/daftar';
 $route['masuk']='home/masuk';
 $route['guidance/login']='admin/halaman_login';
+$route['guidance/checklogin']='admin/login';
 $route['guidance/home']='admin/halaman_backend';
+$route['guidance/logout']='admin/logout';
+$route['guidance/pembimbing/tambah']='admin/halaman_tambahpembimbing';
+$route['guidance/pembimbing/checktambah']='admin/tambahpembimbing';
+$route['guidance/pembimbing/semua']='admin/halaman_lihatpembimbing';
+$route['guidance/pembimbing/edit']='admin/halaman_editpembimbing';
+$route['guidance/pembimbing/checkedit']='admin/editpembimbing';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

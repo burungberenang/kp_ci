@@ -45,7 +45,7 @@ class Member extends CI_Controller {
                     'username' => $logincheck->username,
                     'name' => $logincheck->nama,
                     'lastlogin' => $logincheck->lastlogin,
-                    'role' => '1' // 0 admin, 1 member, 2,3 dst menyusul
+                    'role' => '2' // 1 admin, 2 member, 3,4 dst menyusul
                 );
                 $this->session->set_userdata($loginarray);
                 

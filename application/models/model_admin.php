@@ -49,30 +49,33 @@ class Model_admin extends CI_Model {
     // return success if it's success
     function registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto){
         $sql = "INSERT INTO karyawan (username,password,noKTP,nama,alamat,tglLahir,jabatan,foto) "
-                . " VALUES (?,?,?,?)";
+                . " VALUES (?,?,?,?,?,?,?,?)";
         
         $this->load->database('default');
         
         if (checkusername){
+            
             $this->db->trans_start();
-            $this->db->query($sql,array($name,$email,$username,$password));
+            $this->db->query($sql,array($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto));
             $this->db->trans_complete();
+            
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->close();
+                return "connection_error";
+            }
+            else
+            {
+                $this->db->close();
+                return "success";
+            }
         }
         else{
             $this->db->close();
             return "username_invalid";
         }       
         
-        if ($this->db->trans_status() === FALSE)
-        {
-            $this->db->close();
-            return "connection_error";
-        }
-        else
-        {
-            $this->db->close();
-            return "success";
-        }
+        
     }
     
     // return true and false depends on the username records.
@@ -89,6 +92,18 @@ class Model_admin extends CI_Model {
         {
             return true;
         }
+    }
+    
+    function get_all_karyawan(){
+        
+    }
+    
+    function get_karyawan_byUsername($username){
+        
+    }
+    
+    function get_karyawan_byID($userID){
+        
     }
     
     

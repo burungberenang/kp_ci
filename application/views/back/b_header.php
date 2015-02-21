@@ -33,38 +33,35 @@
                     </ul>
                 </li>
                 <li class="btn"><a title="" href="#"><i class="glyphicon glyphicon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn"><a title="" href="<?php echo base_url(); ?>index.php/onestop/doLogout"><i class="glyphicon glyphicon-share-alt"></i> <span class="text">Logout</span></a></li>
+                <li class="btn"><a title="" href="<?php echo base_url(); ?>index.php/guidance/logout"><i class="glyphicon glyphicon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </div>
 
         <div id="sidebar">
             <ul>
-                <li <?php if ($this->session->flashdata('home')) { echo "class='active'"; }?>><a href="index.html"><i class="glyphicon glyphicon-home"></i> <span>Dasbor</span></a></li>
+                <li <?php if ($this->session->flashdata('home')) { echo "class='active'"; }?>><a href="<?php echo base_url(); ?>index.php/guidance/home"><i class="glyphicon glyphicon-home"></i> <span>Dasbor</span></a></li>
                 <li class="submenu">
                     <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Materi</span><span class="caret"></span></a>
                     <ul>
-                        <li><a href="form-common.html">Lihat Materi</a></li>
-                        <li><a href="form-validation.html">Tambah Materi</a></li>
-                        <li><a href="form-wizard.html">Ubah Materi</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/materi/semua">Lihat Materi</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/materi/tambah">Tambah Materi</a></li>
                     </ul>
                 </li>
                 <li class="submenu" <?php if ($this->session->flashdata('paket')) { echo "class='active'"; }?>>
                     <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Paket</span><span class="caret"></span></a>
                     <ul>
-                        <li><a href="form-common.html">Lihat Paket</a></li>
-                        <li><a href="form-validation.html">Tambah Paket</a></li>
-                        <li><a href="form-wizard.html">Ubah Paket</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/paket/semua">Lihat Paket</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/paket/tambah">Tambah Paket</a></li>
                     </ul>
                 </li>
-                <li class="submenu" <?php if ($this->session->flashdata('pengajar')) { echo "class='active'"; }?>>
-                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Pengajar</span><span class="caret"></span></a>
+                <li class="submenu" <?php if ($this->session->flashdata('pembimbing')) { echo "class='active'"; }?>>
+                    <a href="#"><i class="glyphicon glyphicon-th-list"></i> <span>Pembimbing</span><span class="caret"></span></a>
                     <ul>
-                        <li><a href="form-common.html">Lihat Pengajar</a></li>
-                        <li><a href="form-validation.html">Tambah Pengajar</a></li>
-                        <li><a href="form-wizard.html">Ubah Pengajar</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/pembimbing/semua">Lihat Pembimbing</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/pembimbing/tambah">Tambah Pembimbing</a></li>
                     </ul>
                 </li>
-                <li <?php if ($this->session->flashdata('transaksi')) { echo "class='active'"; }?>><a href="buttons.html"><i class="glyphicon glyphicon-tint"></i> <span>Transaksi</span></a></li>
+                <li <?php if ($this->session->flashdata('transaksi')) { echo "class='active'"; }?>><a href="<?php echo base_url(); ?>index.php/guidance/transaksi"><i class="glyphicon glyphicon-tint"></i> <span>Transaksi</span></a></li>
             </ul>
 
         </div>

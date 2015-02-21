@@ -10,19 +10,20 @@
     </head>
     <body>
         <div id="container">
+            <?php if ($this->session->flashdata('warning'))
+                        {  echo $this->session->flashdata('warning'); }?>
+            
             <div id="loginbox">            
 <!--                <form id="loginform" action="<?php echo base_url(); ?>index.php/onestop/checkLogin" method="post">-->
                     <?php $attributes = array('id' => 'loginform'); 
-                       echo form_open("admin/login",$attributes); ?>
+                       echo form_open("guidance/checklogin",$attributes); ?>
                 
-                    <?php if ($this->session->flashdata('warning'))
-                        {  echo $this->session->flashdata('warning'); }?>
                     <p>Enter username and password to continue.</p>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input class="form-control" type="text" placeholder="Username" name="username"/>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input class="form-control" type="text" placeholder="Username" name="username" required/>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input class="form-control" type="password" placeholder="Password" name="password" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input class="form-control" type="password" placeholder="Password" name="password" required />
                     </div>
                     <hr />
                     <div class="form-actions">

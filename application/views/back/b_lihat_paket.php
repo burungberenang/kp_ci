@@ -1,3 +1,11 @@
+            <div id="content">
+            <div id="content-header">
+                <h1>Lihat Paket</h1>
+            </div>
+            <div id="breadcrumb">
+                <a href="<?php echo site_url(); ?>/guidance/home" title="Go to Home" class="tip-bottom"><i class="glyphicon glyphicon-home"></i> Home</a>
+                <a href="#" class="current">Paket</a>
+            </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

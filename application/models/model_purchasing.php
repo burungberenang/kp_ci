@@ -28,10 +28,34 @@ Class Model_purchasing extends CI_Model
     }
     
     function tambah_materi($nama, $nominal, $masa, $materi){
+        $this->db->trans_start();
         $this->db->query("INSERT INTO paket(nama, nominal, masaBerlaku, idMateri) VALUES('".$nama."', ".$nominal.", ".$masa.", ".$materi.")");
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
     }
     function update_materi($id,$nama,$nominal,$masa,$materi){
+        $this->db->trans_start();
         $this->db->query("UPDATE paket SET nama='".$nama."', nominal=".$nominal.", masaBerlaku=".$masa.", idMateri=".$materi." WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
     }
 } ?>
 

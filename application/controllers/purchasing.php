@@ -9,7 +9,6 @@ class Purchasing extends CI_Controller {
     }
     
     function tambahPaket(){
-        if($this->)
         if($this->session->userdata('user')==null)
         {
             if($this->input->post('simpan')){

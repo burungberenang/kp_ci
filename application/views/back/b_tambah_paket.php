@@ -11,6 +11,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="widget-box">
+                            <?php if ($this->session->flashdata('warning'))
+                                {  echo $this->session->flashdata('warning'); }?>
                             <div class="widget-content">
                                 <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post">
                                     <div class="form-group">

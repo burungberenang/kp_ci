@@ -9,12 +9,29 @@ class Purchasing extends CI_Controller {
     }
     
     function tambahPaket(){
+        if($this->)
         if($this->session->userdata('user')==null)
         {
             if($this->input->post('simpan')){
-                $this->model_purchasing->tambah_materi($this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
+                $hasil=$this->model_purchasing->tambah_materi($this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
+                if($hasil=="connection_error")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
+                        . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                }else if($hasil=="success"){
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Akun berhasil didaftarkan</strong> "
+                        . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                }
                 //echo '<script type="text/javascript">alert("Data telah diubah");</script>';
-                redirect('purchasing/lihatPaket','refresh');
+                redirect('purchasing/tambahPaket','refresh');
             }else if($this->input->post('kembali')){
                 redirect('purchasing/lihatPaket');
             }

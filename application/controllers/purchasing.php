@@ -13,23 +13,29 @@ class Purchasing extends CI_Controller {
         if($this->session->userdata('role'))
         {
             if($this->input->post('simpan')){
+                //buat rule form validation
                 $this->form_validation->set_rules('nama', 'Nama', 'required');
                 $this->form_validation->set_rules('materi', 'Materi', 'required');
                 $this->form_validation->set_rules('nominal', 'Harga', 'required|numeric');
                 $this->form_validation->set_rules('masa', 'Masa berlaku', 'required|numeric');
                 if($this->form_validation->run()==false){
+                    
+                    //munculkan error kalau validasi salah
                     $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
                         . "</button><strong>", "</strong> "
                         . "</div>");
                     $this->session->set_flashdata('warning',validation_errors());
+                    
+                    //tampung pada flash data buat nampilin isi yang sebelumnya 
                     $this->session->set_flashdata('isiform',array('nama'=>$this->input->post('nama'),'nominal'=>$this->input->post('nominal'),'masa'=>$this->input->post('masa'),'materi'=>$this->input->post('materi')));
-                    redirect('purchasing/tambahPaket', 'location');
+                    redirect('guidance/paket/tambah', 'location');
                 }else{
                     $hasil=$this->model_purchasing->tambah_materi($this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
                     if($hasil=="connection_error")
                     {
+                        //munculkan error kalau transaksi sql gagal
                         $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
@@ -37,6 +43,7 @@ class Purchasing extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }else if($hasil=="success"){
+                        //munculkan pemberitahuan jika data telah berhasil ditambahkan
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
@@ -44,17 +51,13 @@ class Purchasing extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    //echo '<script type="text/javascript">alert("Data telah diubah");</script>';
-                    redirect('purchasing/tambahPaket','refresh');
+                    redirect('guidance/paket/tambah','refresh');
                 }
-            }else if($this->input->post('kembali')){
-                redirect('purchasing/lihatPaket');
             }
-            $user=explode("|",$this->session->userdata('user'));
             $data['title']='Tambah Paket A+ Learning';
             $data['title2']='Tambah Paket';
-            $data['user']=$user[0];
             
+            //buat ambil materi di combobox (pada view)
             $data['pilihan']=$this->model_purchasing->ambil_materi();
             
             $this->load->view('back/b_header',$data);
@@ -69,10 +72,8 @@ class Purchasing extends CI_Controller {
     function lihatPaket(){
         if($this->session->userdata('role'))
         {
-            $user=explode("|",$this->session->userdata('user'));
             $data['title']='Lihat Paket A+ Learning';
             $data['title2']='Lihat Paket';
-            $data['user']=$user[0];
             
             $data['paket']=$this->model_purchasing->ambil_paket();
             
@@ -89,16 +90,47 @@ class Purchasing extends CI_Controller {
         if($this->session->userdata('role'))
         {
             if($this->input->post('simpan')){
-                $this->model_purchasing->update_materi($this->input->post('id'), $this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
-                //echo '<script type="text/javascript">alert("Data telah diubah");</script>';
-                redirect('purchasing/lihatPaket','refresh');
-            }else if($this->input->post('kembali')){
-                redirect('purchasing/lihatPaket');
+                //buat rule form validation
+                $this->form_validation->set_rules('nama', 'Nama', 'required');
+                $this->form_validation->set_rules('materi', 'Materi', 'required');
+                $this->form_validation->set_rules('nominal', 'Harga', 'required|numeric');
+                $this->form_validation->set_rules('masa', 'Masa berlaku', 'required|numeric');
+                if($this->form_validation->run()==false){
+                    
+                    //munculkan error kalau validasi salah
+                    $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>", "</strong> "
+                        . "</div>");
+                    $this->session->set_flashdata('warning',validation_errors());
+                    
+                    redirect('guidance/paket/edit/'.$id, 'location');
+                }else{
+                    $hasil=$this->model_purchasing->update_materi($this->input->post('id'), $this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
+                    if($hasil=="connection_error")
+                    {
+                        //munculkan error kalau transaksi sql gagal
+                        $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
+                            . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                    }else if($hasil=="success"){
+                        //munculkan pemberitahuan jika data telah berhasil ditambahkan
+                        $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                    }
+                    redirect('guidance/paket/edit'.$id,'refresh');
+                }
             }
-            $user=explode("|",$this->session->userdata('user'));
             $data['title']='Tambah Paket A+ Learning';
             $data['title2']='Tambah Paket';
-            $data['user']=$user[0];
             
             $data['pilihan']=$this->model_purchasing->ambil_edit_materi();
             $temp=$this->model_purchasing->ambil_edit_paket($id);

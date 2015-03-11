@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" class="btn btn-primary" name="simpan" value="Simpan" />
-                                        <input type="submit" class="btn btn-default" name="kembali" value="Kembali" />
+                                        <a class="btn btn-default" href="<?php echo site_url().'/guidance/paket/semua'; ?>">Kembali</a>
                                     </div>
                                 </form>
                             </div>

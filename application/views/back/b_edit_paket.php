@@ -11,6 +11,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="widget-box">
+                            <?php if ($this->session->flashdata('warning'))
+                                {  echo $this->session->flashdata('warning'); }?>
                             <div class="widget-content">
                                 <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post">
                                     <input type="hidden" value="<?php echo $id; ?>" name="id">
@@ -49,7 +51,7 @@
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" class="btn btn-primary" name="simpan" value="Simpan" />
-                                        <input type="submit" class="btn btn-default" name="kembali" value="Kembali" />
+                                        <a href="<?php echo site_url(); ?>./guidance/paket/semua" class="btn btn-default">Kembali</a>
                                     </div>
                                 </form>
                             </div>

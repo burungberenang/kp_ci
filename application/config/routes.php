@@ -54,7 +54,7 @@ $route['guidance/pembimbing/edit']='admin/halaman_editpembimbing';
 $route['guidance/pembimbing/checkedit']='admin/editpembimbing';
 $route['guidance/paket/tambah']='purchasing/tambahPaket';
 $route['guidance/paket/semua']='purchasing/lihatPaket';
-$route['guidance/paket/edit']='purchasing/editPaket';
+$route['guidance/paket/edit/(:any)']='purchasing/editPaket/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

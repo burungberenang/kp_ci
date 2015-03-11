@@ -13,21 +13,31 @@
                         <div class="widget-box">
                             <?php if ($this->session->flashdata('warning'))
                                 {  echo $this->session->flashdata('warning'); }?>
+                            <?php 
+                                $temp=array();
+                                if ($this->session->flashdata('isiform'))
+                                {  
+                                    $temp = $this->session->flashdata('isiform');
+                                }
+                            ?>
                             <div class="widget-content">
                                 <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post">
                                     <div class="form-group">
                                         <label class="control-label">Nama:</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nama" name="nama"/>
+                                            <input type="text" class="form-control input-small" placeholder="Nama" name="nama" value="<?php if($temp) echo $temp['nama']; ?>" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Materi:</label>
                                         <div class="controls">
-                                            <select multiple class="forn-control" name="materi">
+                                            <select name="materi">
                                                 <?php 
                                                     foreach ($pilihan as $value)
-                                                    echo '<option value='.$value['id'].'>'.$value['pelajaran'].' '.$value['kelas'].'</option>'; 
+                                                    {
+                                                        if($temp&&$value['id']==$temp['materi']) echo '<option selected value='.$value['id'].'>'.$value['pelajaran'].' '.$value['kelas'].'</option>';
+                                                        else echo '<option value='.$value['id'].'>'.$value['pelajaran'].' '.$value['kelas'].'</option>';
+                                                    }
                                                 ?>
                                             </select>
                                         </div>
@@ -35,13 +45,13 @@
                                     <div class="form-group">
                                         <label class="control-label">Harga:</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Harga" name="nominal"/>
+                                            <input type="text" class="form-control input-small" placeholder="Harga" name="nominal" value="<?php if($temp) echo $temp['nominal']; ?>" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Masa berlaku (bulan):</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Masa berlaku" name="masa"/>
+                                            <input type="text" class="form-control input-small" placeholder="Masa berlaku" name="masa" value="<?php if($temp) echo $temp['masa']; ?>" required/>
                                         </div>
                                     </div>
                                     <div class="form-actions">

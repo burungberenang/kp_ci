@@ -23,7 +23,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Materi:</label>
                                         <div class="controls">
-                                            <select class="form-control" name="materi">
+                                            <select name="materi">
                                                 <?php 
                                                     foreach ($pilihan as $value)
                                                     {

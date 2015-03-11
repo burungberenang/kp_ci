@@ -55,6 +55,12 @@ $route['guidance/pembimbing/checkedit']='admin/editpembimbing';
 $route['guidance/paket/tambah']='purchasing/tambahPaket';
 $route['guidance/paket/semua']='purchasing/lihatPaket';
 $route['guidance/paket/edit/(:any)']='purchasing/editPaket/$1';
+$route['guidance/pelajaran/tambah']='material/tambahPelajaran';
+$route['guidance/pelajaran/semua']='material/lihatPelajaran';
+$route['guidance/pelajaran/edit/(:any)']='material/editPelajaran/$1';
+$route['guidance/kelas/tambah']='material/tambahKelas';
+$route['guidance/kelas/semua']='material/lihatKelas';
+$route['guidance/kelas/edit/(:any)']='material/editKelas/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

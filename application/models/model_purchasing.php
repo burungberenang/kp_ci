@@ -27,7 +27,7 @@ Class Model_purchasing extends CI_Model
         return $result->row_array();
     }
     
-    function tambah_materi($nama, $nominal, $masa, $materi){
+    function tambah_paket($nama, $nominal, $masa, $materi){
         $this->db->trans_start();
         $this->db->query("INSERT INTO paket(nama, nominal, masaBerlaku, idMateri) VALUES('".$nama."', ".$nominal.", ".$masa.", ".$materi.")");
         $this->db->trans_complete();
@@ -42,7 +42,7 @@ Class Model_purchasing extends CI_Model
             return "success";
         }
     }
-    function update_materi($id,$nama,$nominal,$masa,$materi){
+    function update_paket($id,$nama,$nominal,$masa,$materi){
         $this->db->trans_start();
         $this->db->query("UPDATE paket SET nama='".$nama."', nominal=".$nominal.", masaBerlaku=".$masa.", idMateri=".$materi." WHERE id=".$id);
         $this->db->trans_complete();

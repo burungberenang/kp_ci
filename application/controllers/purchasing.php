@@ -32,7 +32,7 @@ class Purchasing extends CI_Controller {
                     $this->session->set_flashdata('isiform',array('nama'=>$this->input->post('nama'),'nominal'=>$this->input->post('nominal'),'masa'=>$this->input->post('masa'),'materi'=>$this->input->post('materi')));
                     redirect('guidance/paket/tambah', 'location');
                 }else{
-                    $hasil=$this->model_purchasing->tambah_materi($this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
+                    $hasil=$this->model_purchasing->tambah_paket($this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
                     if($hasil=="connection_error")
                     {
                         //munculkan error kalau transaksi sql gagal
@@ -107,7 +107,7 @@ class Purchasing extends CI_Controller {
                     
                     redirect('guidance/paket/edit/'.$id, 'location');
                 }else{
-                    $hasil=$this->model_purchasing->update_materi($this->input->post('id'), $this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
+                    $hasil=$this->model_purchasing->update_paket($this->input->post('id'), $this->input->post('nama'),$this->input->post('nominal'),$this->input->post('masa'),$this->input->post('materi'));
                     if($hasil=="connection_error")
                     {
                         //munculkan error kalau transaksi sql gagal
@@ -129,8 +129,8 @@ class Purchasing extends CI_Controller {
                     redirect('guidance/paket/edit'.$id,'refresh');
                 }
             }
-            $data['title']='Tambah Paket A+ Learning';
-            $data['title2']='Tambah Paket';
+            $data['title']='Edit Paket A+ Learning';
+            $data['title2']='Edit Paket';
             
             $data['pilihan']=$this->model_purchasing->ambil_edit_materi();
             $temp=$this->model_purchasing->ambil_edit_paket($id);

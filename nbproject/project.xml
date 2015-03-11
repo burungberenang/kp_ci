@@ -7,6 +7,14 @@
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>Alamat</word>
+            <word>Kelas</word>
+            <word>Kembali</word>
+            <word>Lihat</word>
+            <word>Materi</word>
+            <word>Paket</word>
+            <word>Pelajaran</word>
+            <word>Pembimbing</word>
+            <word>Tambah</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

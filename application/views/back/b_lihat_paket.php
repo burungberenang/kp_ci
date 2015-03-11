@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <!--<a class="btn btn-info" href="<?php echo site_url(); ?>/purchasing/tambahPaket">Tambah Paket</a>-->
+                        <!--<a class="btn btn-info" href="<?php echo site_url(); ?>/guidance/paket/tambah">Tambah Paket</a>-->
                         <div class="widget-box">
                             <div class="widget-content nopadding">
                                 <table class="table table-bordered table-striped table-hover">

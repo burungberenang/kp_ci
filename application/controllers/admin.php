@@ -104,6 +104,9 @@ class Admin extends CI_Controller {
     function tambahpembimbing(){
         //load model
         $this->load->model('model_admin');
+                
+        $this->load->library('upload');
+        $this->load->library('image_lib');
         
         //set validation rules and message
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -134,40 +137,83 @@ class Admin extends CI_Controller {
 	}
         else
 	{
-            // insert database, etc
-            $username = $this->input->post('email');
-            $password = $this->input->post('pass');
-            $noKTP = $this->input->post('name');
-            $nama = $this->input->post('phone');
-            $alamat = $this->input->post('role');
-            $tglLahir = $this->input->post('role');;
-            $jabatan = $this->input->post('role');;
-            $linkfoto = $this->input->post('role');;
-            
-            if (!$this->md_admin->checkemail($data['email']))
+            if (!$this->upload->do_upload('link') && $this->model_admin->checkusername($this->input->post('username')))
             {
-                if ($this->md_admin->adduser($data['email'], $data['pass'], $data['name'], $data['phone'], $data['role']))
-                {
-                    // redirect to contact page + notification
-                    $data['warning'] = "success";
-                    $this->load->view('admin/vd_header.php',$data);
-                    $this->load->view('admin/vd_adduser.php',$data);
-                    $this->load->view('admin/vd_footer.php',$data);
+                if ($this->model_admin->checkusername($this->input->post('username'))){
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Username telah terpakai</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');
                 }
-                else
-                {
-                    $data['warning'] = "connectionfailed";
-                    $this->load->view('admin/vd_header.php',$data);
-                    $this->load->view('admin/vd_adduser.php',$data);
-                    $this->load->view('admin/vd_footer.php',$data);
+                else{
+                    $data = $this->upload->data();
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>".$this->upload->display_errors()."</strong> "
+                                . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');
                 }
             }
             else
             {
-                $data['warning'] = "duplicateemail";
-                $this->load->view('admin/vd_header.php',$data);
-                $this->load->view('admin/vd_adduser.php',$data);
-                $this->load->view('admin/vd_footer.php',$data);
+                // insert database, etc
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+                $noKTP = $this->input->post('noKTP');
+                $nama = $this->input->post('nama');
+                $alamat = $this->input->post('alamat');
+                $tglLahir = $this->input->post('tglLahir');
+                $jabatan = $this->input->post('jabatan');
+                $data = $this->upload->data();
+                $linkfoto = $data['file_name'];
+
+                $status = $this->model_admin->registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$linkfoto);
+
+                if ($status == "success")
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');
+                }
+                else if ($status == "connection_failed")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');
+                }
+                else if ($status == "username_invalid")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Username telah terpakai, silahkan coba username lain.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');    
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$status."</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location'); 
+                }
             }
         }
     }
@@ -176,6 +222,9 @@ class Admin extends CI_Controller {
         $data['title']="Daftar Pembimbing - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
+        
+        $this->load->model('model_admin');
+        $data['karyawan'] = $this->model_admin->get_all_karyawan();
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_lihat_pembimbing');

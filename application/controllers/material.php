@@ -20,5 +20,15 @@ class Material extends CI_Controller {
         $this->load->library('form_validation');
     }
     
-    //put your code here
+    function tambahbab(){
+        
+    }
+    
+    function tambahsubbab(){
+        
+    }
+    
+    function tambahaksesmateri(){
+        
+    }
 }

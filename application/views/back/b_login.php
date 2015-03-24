@@ -33,7 +33,6 @@
                         </div>
                         <div class="pull-right"><input type="submit" class="btn btn-default" value="Login" /></div>
                     </div>
-                </form>
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/jquery.min.js"></script>

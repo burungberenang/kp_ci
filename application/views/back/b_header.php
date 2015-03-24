@@ -7,8 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/bootstrap.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/bootstrap-glyphicons.css" type="text/css"/>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.main.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.blue.css" type="text/css"/>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/select2.css" type="text/css"/>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.main.css" type="text/css"/>
         
         
     </head>
@@ -45,6 +46,10 @@
                     <ul>
                         <li><a href="<?php echo base_url(); ?>index.php/guidance/materi/semua">Lihat Materi</a></li>
                         <li><a href="<?php echo base_url(); ?>index.php/guidance/materi/tambah">Tambah Materi</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/kelas/semua">Lihat Kelas</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/kelas/tambah">Tambah Kelas</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/pelajaran/semua">Lihat Pelajaran</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/pelajaran/tambah">Tambah Pelajaran</a></li>
                     </ul>
                 </li>
                 <li class="submenu" <?php if ($this->session->flashdata('paket')) { echo "class='active'"; }?>>

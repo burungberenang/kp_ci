@@ -13,10 +13,10 @@
                         <div class="widget-box">
                             <?php if ($this->session->flashdata('warning'))
                                 {  echo $this->session->flashdata('warning'); }?>
-                            
+                                
                             <div class="widget-content">
                                 <?php $attributes = array('class' => 'form-horizontal'); 
-                                    echo form_open("guidance/checklogin",$attributes); ?>
+                                    echo form_open_multipart("guidance/pembimbing/checktambah",$attributes); ?>
                                 
                                     <div class="form-group">
 					<label class="control-label">Username</label>
@@ -81,7 +81,7 @@
                                     <div class="form-group">
 					<label class="control-label">Link Foto</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="http://imgshack.us/123456" name="link" required/>
+                                            <input type="file" class="form-control input-small" placeholder="http://imgshack.us/123456" name="link" required/>
 					</div>
                                     </div>
                                     

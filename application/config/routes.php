@@ -61,6 +61,10 @@ $route['guidance/pelajaran/edit/(:any)']='material/editPelajaran/$1';
 $route['guidance/kelas/tambah']='material/tambahKelas';
 $route['guidance/kelas/semua']='material/lihatKelas';
 $route['guidance/kelas/edit/(:any)']='material/editKelas/$1';
+$route['guidance/materi/tambah']='material/tambahMateri';
+$route['guidance/materi/semua']='material/lihatMateri';
+$route['guidance/materi/edit/(:any)']='material/editMateri/$1';
+$route['guidance/transaksi/histori']='purchasing/lihatHistori';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

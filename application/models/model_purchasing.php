@@ -57,5 +57,10 @@ Class Model_purchasing extends CI_Model
             return "success";
         }
     }
+
+    function ambil_histori(){
+        $result = $this->db->query(" SELECT tanggal, gambar, tanggalNonAktif, m.nama as 'member', p.nama as 'paket' FROM historybayar h INNER JOIN member m ON m.id=h.idMember INNER JOIN paket p ON p.id=h.idPaket ");
+        return $result->result_array();
+    }
 } ?>
 

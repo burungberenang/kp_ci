@@ -9,6 +9,23 @@ class Purchasing extends CI_Controller {
         $this->load->model('model_purchasing');
     }
     
+    function lihatHistori(){
+        if($this->session->userdata('role'))
+        {
+            $data['title']='Lihat Histori Transaksi A+ Learning';
+            $data['title2']='Lihat Histori Transaksi';
+            
+            $data['histori']=$this->model_purchasing->ambil_histori();
+            
+            $this->load->view('back/b_header',$data);
+            $this->load->view('back/b_lihat_histori',$data);
+            $this->load->view('back/b_footer');
+        } else {
+            redirect('guidance/login', 'refresh');
+        }
+        
+    }
+    
     function tambahPaket(){
         if($this->session->userdata('role'))
         {

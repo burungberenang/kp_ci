@@ -344,4 +344,57 @@ class Model_material extends CI_Model {
             return "success";
         }
     }
+    
+    function next_id_materi(){
+        $result = $this->db->query("SELECT auto_increment as 'nextId' FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'materi' AND TABLE_SCHEMA = 'a_plus_learning'");
+        return $result->row();
+    }
+    
+    function cek_materi($pelajaran, $kelas){
+        $result = $this->db->query("SELECT * FROM materi WHERE idPelajaran = '".$pelajaran."' AND idKelas = '".$kelas."' ");
+        if($result->num_rows() > 0) return FALSE;
+        else return TRUE;
+    }
+    
+    function ambil_materi(){
+        $result = $this->db->query("SELECT m.id, p.nama as 'pelajaran', k.nama as 'kelas' FROM materi m INNER JOIN pelajaran p ON p.id=m.idPelajaran INNER JOIN kelas k ON k.id=m.idKelas");
+        return $result->result_array();
+    }
+    
+    function ambil_edit_materi($id){
+        $result = $this->db->query("SELECT m.id, p.id as 'pelajaran', k.id as 'kelas' FROM materi m INNER JOIN pelajaran p ON p.id=m.idPelajaran INNER JOIN kelas k ON k.id=m.idKelas WHERE m.id=".$id);
+        return $result->row_array();
+    }
+    
+    function tambah_materi($pelajaran, $kelas){
+        $this->db->trans_start();
+        $this->db->query("INSERT INTO materi(idPelajaran, idKelas) VALUES('".$pelajaran."', '".$kelas."')");
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
+    
+    function update_materi($id, $pelajaran, $kelas){
+        $this->db->trans_start();
+        $this->db->query("UPDATE materi SET idPelajaran='".$pelajaran."',  idKelas='".$kelas."' WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 }

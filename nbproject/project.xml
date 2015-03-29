@@ -6,7 +6,10 @@
             <name>kp_ci</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Aktif</word>
             <word>Alamat</word>
+            <word>Gambar</word>
+            <word>Histori</word>
             <word>Kelas</word>
             <word>Kembali</word>
             <word>Lihat</word>
@@ -15,6 +18,8 @@
             <word>Pelajaran</word>
             <word>Pembimbing</word>
             <word>Tambah</word>
+            <word>Tanggal</word>
+            <word>Transaksi</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -78,6 +78,11 @@ $route['guidance/subbab/edit/(:num)']='material/halaman_edit_subbab/$1';
 $route['guidance/aksesmateri/edit/(:num)/(:num)']='material/halaman_edit_aksesmateri/$1/$2';
 $route['guidance/bab/checkedit']='material/editbab';
 $route['guidance/subbab/checkedit']='material/editsubbab';
+$route['guidance/materi/tambah']='material/tambahMateri';
+$route['guidance/materi/semua']='material/lihatMateri';
+$route['guidance/materi/edit/(:any)']='material/editMateri/$1';
+$route['guidance/transaksi/histori']='purchasing/lihatHistori';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

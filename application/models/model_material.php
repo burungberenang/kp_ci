@@ -197,9 +197,9 @@ class Model_material extends CI_Model {
     
     function get_all_bab_detail(){
         $sql = "SELECT b.id as id, b.nama as namaBab, p.nama as namaPelajaran, k.nama as namaKelas FROM bab b "
-                . " INNER JOIN materi m "
-                . " INNER JOIN pelajaran p"
-                . " INNER JOIN kelas k";
+                . " INNER JOIN materi m ON m.id = b.idMateri "
+                . " INNER JOIN pelajaran p ON p.id = m.idPelajaran"
+                . " INNER JOIN kelas k ON k.id = m.idKelas";
                 
         $this->load->database('default');
         $query = $this->db->query($sql);

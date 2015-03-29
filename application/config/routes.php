@@ -61,6 +61,23 @@ $route['guidance/pelajaran/edit/(:any)']='material/editPelajaran/$1';
 $route['guidance/kelas/tambah']='material/tambahKelas';
 $route['guidance/kelas/semua']='material/lihatKelas';
 $route['guidance/kelas/edit/(:any)']='material/editKelas/$1';
+$route['guidance/bab/tambah']='material/halaman_tambahbab';
+$route['guidance/subbab/tambah']='material/halaman_tambahsubbab';
+$route['guidance/aksesmateri/tambah']='material/halaman_tambahaksesmateri';
+$route['guidance/bab/checktambah']='material/tambahbab';
+$route['guidance/subbab/checktambah']='material/tambahsubbab';
+$route['guidance/aksesmateri/checktambah']='material/tambahaksesmateri';
+$route['guidance/bab/hapus/(:num)']='material/hapus_bab/$1';
+$route['guidance/subbab/hapus/(:num)']='material/hapus_subbab/$1';
+$route['guidance/aksesmateri/hapus/(:num)/(:num)']='material/hapus_aksesmateri/$1/$2';
+$route['guidance/aksesmateri/semua']='material/halaman_lihataksesmateri';
+$route['guidance/bab/semua']='material/halaman_lihatbab';
+$route['guidance/subbab/semua']='material/halaman_lihatsubbab';
+$route['guidance/bab/edit/(:num)']='material/halaman_edit_bab/$1';
+$route['guidance/subbab/edit/(:num)']='material/halaman_edit_subbab/$1';
+$route['guidance/aksesmateri/edit/(:num)/(:num)']='material/halaman_edit_aksesmateri/$1/$2';
+$route['guidance/bab/checkedit']='material/editbab';
+$route['guidance/subbab/checkedit']='material/editsubbab';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

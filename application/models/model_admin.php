@@ -90,7 +90,7 @@ class Model_admin extends CI_Model {
     }
     
     function get_all_karyawan(){
-        $sql = "SELECT foto, nama, jabatan FROM karyawan";
+        $sql = "SELECT id, foto, nama, jabatan FROM karyawan";
                 
         $this->load->database('default');
         $query = $this->db->query($sql);

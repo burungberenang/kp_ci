@@ -21,16 +21,18 @@
                                             <th>Tanggal Non Aktif</th>
                                             <th>Member</th>
                                             <th>Paket</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>      
                                         <?php foreach ($histori as $value): ?>
                                                 <tr>
                                                     <td><?php echo $value['tanggal'];?></td>
-                                                    <td><?php echo $value['gambar'];?></td>
+                                                    <td><img src ="<?php echo base_url().'asset/images/transaksi/'.$value['gambar'];?>"/></td>
                                                     <td><?php echo $value['tanggalNonAktif'];?></td>
                                                     <td><?php echo $value['member'];?></td>
                                                     <td><?php echo $value['paket'];?></td>
+                                                    <td><?php if($value['status']==0) echo 'Belum bayar'; else echo 'Lunas'; ?></td>
                                                 </tr>
                                         <?php endforeach; ?>
                                         <!--hapus paket pake jquery aja-->

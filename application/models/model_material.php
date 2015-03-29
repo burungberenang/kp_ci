@@ -146,6 +146,30 @@ class Model_material extends CI_Model {
             return "success";
         }
     }
+
+    function get_detail_karyawan($id){
+        $sql = "SELECT id, nama "
+                . " FROM karyawan"
+                . " WHERE id = ".$id;
+                
+        $this->load->database('default');
+        $query = $this->db->query($sql);
+        
+        return $query;
+    }
+    
+    function get_detail_materi($id){
+        $sql = "SELECT id, nama, idMateri "
+                . " FROM materi m"
+                . " INNER JOIN pelajaran p on m.idPelajaran = p.id"
+                . " INNER JOIN kelas k on k.id = m.idKelas"
+                . " WHERE m.id = ".$id;
+                
+        $this->load->database('default');
+        $query = $this->db->query($sql);
+        
+        return $query;
+    }
     
     function get_detail_bab($id){
         $sql = "SELECT id, nama, idMateri "
@@ -160,7 +184,7 @@ class Model_material extends CI_Model {
     
     function get_all_aksesmateri_detail(){
         $sql = "SELECT k1.id as idKaryawan, m.id as idMateri, k1.nama as namaKaryawan,p.nama as namaPelajaran, k2.nama as namaKelas FROM aksesmateri"
-                . " INNER JOIN karyawan k1"
+                . " INNER JOIN karyawan k1 "
                 . " INNER JOIN materi m"
                 . " INNER JOIN pelajaran p"
                 . " INNER JOIN kelas k2 ";

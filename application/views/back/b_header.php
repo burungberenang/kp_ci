@@ -11,6 +11,11 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/select2.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.main.css" type="text/css"/>
         
+        <style>
+            .modal-backdrop {
+                z-index: 0;
+            }
+        </style>
         
     </head>
     <body>

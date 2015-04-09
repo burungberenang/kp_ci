@@ -12,6 +12,14 @@ class Purchasing extends CI_Controller {
     function lihatHistori(){
         if($this->session->userdata('role'))
         {
+            if($this->input->post('ubah')){
+                $id = $this->input->post('id');
+                $status = $this->model_purchasing->ambil_status_histori($id)->status;
+                if($status==0) $status=1;
+                else $status=0;
+                $this->model_purchasing->ubah_histori($id, $status);
+                redirect('guidance/transaksi','refresh');
+            }
             $data['title']='Lihat Histori Transaksi A+ Learning';
             $data['title2']='Lihat Histori Transaksi';
             

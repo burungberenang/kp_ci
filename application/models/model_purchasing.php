@@ -59,8 +59,27 @@ Class Model_purchasing extends CI_Model
     }
 
     function ambil_histori(){
-        $result = $this->db->query(" SELECT tanggal, gambar, tanggalNonAktif, m.nama as 'member', p.nama as 'paket', status FROM historybayar h INNER JOIN member m ON m.id=h.idMember INNER JOIN paket p ON p.id=h.idPaket ");
+        $result = $this->db->query(" SELECT h.id, tanggal, gambar, tanggalNonAktif, m.nama as 'member', p.nama as 'paket', status FROM historybayar h INNER JOIN member m ON m.id=h.idMember INNER JOIN paket p ON p.id=h.idPaket ");
         return $result->result_array();
+    }
+    function ambil_status_histori($id){
+        $result = $this->db->query(" SELECT status FROM historybayar WHERE id = ".$id);
+        return $result->row();
+    }
+    function ubah_histori($id, $status){
+        $this->db->trans_start();
+        $result = $this->db->query(" UPDATE historybayar SET status = ".$status." WHERE id = ".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
     }
 } ?>
 

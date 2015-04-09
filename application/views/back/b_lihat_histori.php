@@ -24,21 +24,43 @@
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>      
+                                    <tbody>
                                         <?php foreach ($histori as $value): ?>
-                                                <tr>
-                                                    <td><?php echo $value['tanggal'];?></td>
-                                                    <td><img src ="<?php echo base_url().'asset/images/transaksi/'.$value['gambar'];?>"/></td>
-                                                    <td><?php echo $value['tanggalNonAktif'];?></td>
-                                                    <td><?php echo $value['member'];?></td>
-                                                    <td><?php echo $value['paket'];?></td>
-                                                    <td><?php if($value['status']==0) echo 'Belum bayar'; else echo 'Lunas'; ?></td>
-                                                </tr>
+                                            <tr>
+                                                <td><?php echo $value['tanggal'];?></td>
+                                                <td><img src ="<?php echo base_url().'asset/transaksi/'.$value['gambar'];?>"/></td>
+                                                <td><?php echo $value['tanggalNonAktif'];?></td>
+                                                <td><?php echo $value['member'];?></td>
+                                                <td><?php echo $value['paket'];?></td>
+                                                <td><?php if($value['status']==0) echo 'Belum bayar'; else echo 'Lunas'; ?>
+                                                    <a href="#myModal<?php echo $value['id']; ?>" data-toggle="modal" class="btn btn-link btn-xs">Ubah Status</a>
+                                                    <!-- MODAL -->
+                                                    <div id="myModal<?php echo $value['id']; ?>" class="modal fade">
+                                                        <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button data-dismiss="modal" class="close" type="button">×</button>
+                                                                    <h3>Anda yakin untuk mengubah data?</h3>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post" action="<?php echo current_url(); ?>">
+                                                                        <input type="hidden" name="id" value="<?php echo $value['id']; ?>">
+                                                                        <input class="btn btn-success" name="ubah" type="submit" value="Ya">
+                                                                        <input class="btn btn-danger" type="submit" value="Tidak">
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--hapus paket pake jquery aja-->
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
-                                        <!--hapus paket pake jquery aja-->
+                                        
                                     </tbody>
-                                </table>							
+                                </table>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

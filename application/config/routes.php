@@ -82,7 +82,7 @@ $route['guidance/materi/tambah']='material/tambahMateri';
 $route['guidance/materi/semua']='material/lihatMateri';
 $route['guidance/materi/edit/(:any)']='material/editMateri/$1';
 
-$route['guidance/transaksi/histori']='purchasing/lihatHistori';
+$route['guidance/transaksi']='purchasing/lihatHistori';
 
 
 /* End of file routes.php */

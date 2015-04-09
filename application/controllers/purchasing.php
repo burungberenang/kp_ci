@@ -97,6 +97,10 @@ class Purchasing extends CI_Controller {
     function lihatPaket(){
         if($this->session->userdata('role'))
         {
+            if($this->input->post('hapus')){
+                $this->model_purchasing->hapus_paket($this->input->post('id'));
+                redirect('guidance/paket/semua', 'refresh');
+            }
             $data['title']='Lihat Paket A+ Learning';
             $data['title2']='Lihat Paket';
             

@@ -57,6 +57,21 @@ Class Model_purchasing extends CI_Model
             return "success";
         }
     }
+    function hapus_paket($id){
+        $this->db->trans_start();
+        $this->db->query("DELETE FROM paket WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 
     function ambil_histori(){
         $result = $this->db->query(" SELECT h.id, tanggal, gambar, tanggalNonAktif, m.nama as 'member', p.nama as 'paket', status FROM historybayar h INNER JOIN member m ON m.id=h.idMember INNER JOIN paket p ON p.id=h.idPaket ");

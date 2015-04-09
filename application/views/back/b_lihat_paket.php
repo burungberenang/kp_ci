@@ -24,20 +24,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>      
-                                        <?php 
-                                            foreach ($paket as $value)
-                                                echo '<tr>'
-                                                        . '<td>'.$value['nama'].'</td>'
-                                                        . '<td>'.$value['materi'].' '.$value['materi1'].'</td>'
-                                                        . '<td>'.$value['nominal'].'</td>'
-                                                        . '<td>'.$value['masaBerlaku'].'</td>'
-                                                        . '<td>'
-                                                            . '<a class="btn btn-primary" href="'.site_url().'/guidance/paket/edit/'.$value['id'].'">Edit</a> '
-                                                            . '<a class="btn btn-danger" href="#">Delete</a> '
-                                                        . '</td>'
-                                                    . '</tr>'; 
-                                            //hapus paket pake jquery aja
-                                        ?>
+                                        <?php foreach ($paket as $value): ?>
+                                                <tr>
+                                                        <td><?php echo $value['nama'];?></td>
+                                                        <td><?php echo $value['materi'].' '.$value['materi1'];?></td>
+                                                        <td><?php echo $value['nominal'];?></td>
+                                                        <td><?php echo $value['masaBerlaku'];?></td>
+                                                        <td>
+                                                            <a class="btn btn-primary" href="<?php echo site_url().'/guidance/paket/edit/'.$value['id']?>">Edit</a>
+                                                            <a href="#myModal<?php echo $value['id']; ?>" data-toggle="modal" class="btn btn-danger">Delete</a>
+                                                            <!-- MODAL -->
+                                                            <div id="myModal<?php echo $value['id']; ?>" class="modal fade">
+                                                                <div class="modal-dialog modal-sm">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button data-dismiss="modal" class="close" type="button">×</button>
+                                                                            <h3>Anda yakin untuk menghapus data?</h3>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form method="post" action="<?php echo current_url(); ?>">
+                                                                                <input type="hidden" name="id" value="<?php echo $value['id']; ?>">
+                                                                                <input class="btn btn-success" name="hapus" type="submit" value="Ya">
+                                                                                <input class="btn btn-danger" type="submit" value="Tidak">
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>							
                             </div>

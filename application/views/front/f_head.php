@@ -41,8 +41,17 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                    <?php if ($this->session->userdata('role') != '4'):  // session member?>
+                    
                         <li><a href="<?php echo base_url(); ?>index.php/daftar">Daftar</a></li>
                         <li><a href="<?php echo base_url(); ?>index.php/masuk">Masuk</a></li>
+                        
+                    <?php else : ?>
+                        
+                        <li><a href="<?php echo base_url(); ?>">Materiku</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Beli Materi</a></li>
+                        
+                    <?php endif; ?>
                         <li>
                             <form class="navbar-form navbar-right" role="search">
                                 <div class="form-group">

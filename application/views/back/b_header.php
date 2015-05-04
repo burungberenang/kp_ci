@@ -55,6 +55,12 @@
                         <li><a href="<?php echo base_url(); ?>index.php/guidance/kelas/tambah">Tambah Kelas</a></li>
                         <li><a href="<?php echo base_url(); ?>index.php/guidance/pelajaran/semua">Lihat Pelajaran</a></li>
                         <li><a href="<?php echo base_url(); ?>index.php/guidance/pelajaran/tambah">Tambah Pelajaran</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/bab/semua">Lihat Bab</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/bab/tambah">Tambah Bab</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/subbab/semua">Lihat Subbab</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/subbab/tambah">Tambah Subbab</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/aksesmateri/semua">Lihat Akses Materi</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/guidance/aksesmateri/tambah">Tambah Akses Materi</a></li>
                     </ul>
                 </li>
                 <li class="submenu" <?php if ($this->session->flashdata('paket')) { echo "class='active'"; }?>>

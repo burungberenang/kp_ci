@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Deskripsi</label>
                                         <div class="controls">
-                                            <textarea class="form-control" name="deskripsi"></textarea>
+                                            <textarea class="form-control" name="deskripsi"><?php echo $subbab->deskripsi; ?></textarea>
                                         </div>
                                     </div>
 

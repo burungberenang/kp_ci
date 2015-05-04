@@ -1,8 +1,9 @@
 
             <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 konten">
+                
                 <?php $attributes = array('style' => 'width:50%; margin:auto; margin-top:50px; padding:auto;'); 
                        echo form_open("member/login",$attributes); ?>
-                
+                <h2>Login Member</h2>
                 <?php if ($this->session->flashdata('warning'))
                         {  echo $this->session->flashdata('warning'); }?>
                 
@@ -15,7 +16,7 @@
                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                       <input class="form-control" type="password" placeholder="Password" name="password" required>
                   </div>
-                  <div style="margin:5px;"><a href="<?php echo base_url(); ?>index.php/home/register">Belum memiliki akun? Silahkan daftar terlebih dahulu.</a></div>
+                  <div style="margin:5px;"><a href="<?php echo base_url(); ?>index.php/daftar">Belum memiliki akun? Silahkan daftar terlebih dahulu.</a></div>
                   <div class="pull-right"><input type="submit" class="btn btn-default" value="Masuk" /></div>
                 </form>
             </div>

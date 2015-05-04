@@ -16,12 +16,26 @@
                                 
                             <div class="widget-content">
                                 <?php $attributes = array('class' => 'form-horizontal'); 
-                                    echo form_open("guidance/aksesmateri/checktambah",$attributes); ?>
+                                    echo form_open("guidance/aksesmateri/checkedit",$attributes); ?>
+                                
+                                    <div class="form-group">
+					<label class="control-label">Karyawan Lama</label>
+					<div class="controls">
+                                            <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama" value="<?php echo $karyawanlama->id."-".$karyawanlama->nama; ?>" required/>
+					</div>
+                                    </div>
+                                
+                                    <div class="form-group">
+					<label class="control-label">Materi Lama</label>
+					<div class="controls">
+                                            <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama"  required/>
+					</div>
+                                    </div>
                                     
                                     <div class="form-group">
-					<label class="control-label">ID Karyawan</label>
+					<label class="control-label">Karyawan Baru</label>
 					<div class="controls">
-                                            <select multiple class="forn-control" required>
+                                            <select name="idKaryawan" required>
                                             
                                             <?php
                                                 if ($karyawan){
@@ -35,9 +49,9 @@
                                     </div>
                                 
                                     <div class="form-group">
-					<label class="control-label">ID Materi</label>
+					<label class="control-label">Materi Baru</label>
 					<div class="controls">
-                                            <select name="idMateri" required>
+                                            <select multiple class="forn-control" required>
                                             <?php
                                                 if ($materi){
                                                     foreach($materi->result() as $row){

@@ -40,11 +40,12 @@
                                     </div>
                                 
                                     <div class="form-group">
-					<label class="control-label">Deskripsi</label>
-					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Deskripsi" name="deskripsi" value="<?php echo $subbab->deskripsi; ?>" required/>
-					</div>
+                                        <label class="control-label">Deskripsi</label>
+                                        <div class="controls">
+                                            <textarea class="form-control" name="deskripsi"></textarea>
+                                        </div>
                                     </div>
+
                                 
                                     <div class="form-group">
 					<label class="control-label">ID Bab</label>

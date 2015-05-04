@@ -21,16 +21,16 @@ class Home extends CI_Controller {
     
     function index(){
         $data['title']="Beranda - A+ Learning Guidance";
-        $this->load->view('front/f_header',$data);
-        $this->load->view('front/f_home');
-        $this->load->view('front/f_footer');
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_body');
+        $this->load->view('front/f_foot');
     }
     
     function info(){
         $data['title']="Info - A+ Learning Guidance";
-        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_head',$data);
         $this->load->view('front/f_info');
-        $this->load->view('front/f_footer');
+        $this->load->view('front/f_foot');
     }
     
     function masuk(){
@@ -38,9 +38,9 @@ class Home extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         
-        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_head',$data);
         $this->load->view('front/f_login_user');
-        $this->load->view('front/f_footer');        
+        $this->load->view('front/f_foot');        
     }
     
     function daftar(){
@@ -48,9 +48,9 @@ class Home extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         
-        $this->load->view('front/f_header',$data);
+        $this->load->view('front/f_head',$data);
         $this->load->view('front/f_register_user');
-        $this->load->view('front/f_footer');
+        $this->load->view('front/f_foot');
     }
     
     function logincheck(){

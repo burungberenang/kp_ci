@@ -127,7 +127,7 @@ class Model_material extends CI_Model {
     }
     
     function edit_subbab($idSubbab,$nama,$link,$deskripsi,$idBab){
-        $sql = "UPDATE subbab SET nama=?, link=? deskripsi=? idBab=? WHERE id=?";
+        $sql = "UPDATE subbab SET nama=?, link=?, deskripsi=?, idBab=? WHERE id=?";
         
         $this->load->database('default');
         

@@ -26,10 +26,18 @@
                                     </div>
                                 
                                     <div class="form-group">
-					<label class="control-label">Materi Lama</label>
-					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama"  required/>
-					</div>
+                                        <label class="control-label">Materi Lama</label>
+                                        <div class="controls">
+                                            <textarea class="form-control">
+                                                <?php
+                                                    if ($materilama){
+                                                    foreach($materilama->result() as $row){
+                                                        echo $row->id."-".$row->pelajaran." ".$row->kelas."&#13;&#10;";
+                                                    }
+                                                }
+                                                ?>
+                                            </textarea>
+                                        </div>
                                     </div>
                                     
                                     <div class="form-group">

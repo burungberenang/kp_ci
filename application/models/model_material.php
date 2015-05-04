@@ -159,7 +159,7 @@ class Model_material extends CI_Model {
     }
     
     function get_detail_materi($id){
-        $sql = "SELECT m.id, p.nama, k.nama "
+        $sql = "SELECT m.id, p.nama as pelajaran, k.nama as kelas"
                 . " FROM materi m"
                 . " INNER JOIN pelajaran p on m.idPelajaran = p.id"
                 . " INNER JOIN kelas k on k.id = m.idKelas"

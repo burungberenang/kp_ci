@@ -179,7 +179,7 @@ class Model_material extends CI_Model {
         $this->load->database('default');
         $query = $this->db->query($sql);
         
-        return $query;
+        return $query->row();
     }
     
     function get_all_aksesmateri_detail(){
@@ -239,7 +239,7 @@ class Model_material extends CI_Model {
 
     function registersubbab($nama,$link,$deskripsi,$idBab){
         $this->db->trans_start();
-        $this->db->query("INSERT INTO subbab(nama,link,deskripsi,idBab) VALUES('".$nama."','".$link."','".$deskripsi."',".$idiBab.")");
+        $this->db->query("INSERT INTO subbab(nama,link,deskripsi,idBab) VALUES('".$nama."','".$link."','".$deskripsi."',".$idBab.")");
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE)
         {

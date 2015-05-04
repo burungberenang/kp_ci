@@ -19,9 +19,8 @@
                                     echo form_open("guidance/bab/checkedit",$attributes); ?>
                                 
                                     <div class="form-group">
-					<label class="control-label">ID</label>
 					<div class="controls">
-                                            <label class="control-label"><?php echo $bab->id; ?></label>
+                                            <input type="hidden" value="<?php echo $bab->id; ?>"></input>
 					</div>
                                     </div>
                                 

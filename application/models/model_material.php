@@ -171,6 +171,17 @@ class Model_material extends CI_Model {
         return $query;
     }
     
+    function get_detail_subbab($id){
+        $sql = "SELECT id, nama, link, deskripsi idBab "
+                . " FROM subbab"
+                . " WHERE id = ".$id;
+                
+        $this->load->database('default');
+        $query = $this->db->query($sql);
+        
+        return $query->row();
+    }
+    
     function get_detail_bab($id){
         $sql = "SELECT id, nama, idMateri "
                 . " FROM bab"

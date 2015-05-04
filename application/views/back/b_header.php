@@ -24,13 +24,13 @@
             <a id="menu-trigger" href="#"><i class="glyphicon glyphicon-align-justify"></i></a> 
         </div>
 
-        <div id="search">
+<!--        <div id="search">
             <input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
+        </div>-->
         <div id="user-nav">
             <ul class="btn-group">
                 <li class="btn" ><a title="" href="#"><i class="glyphicon glyphicon-user"></i> <span class="text">Profile</span></a></li>
-                <li class="btn dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="glyphicon glyphicon-envelope"></i> <span class="text">Messages</span> <span class="label label-danger">5</span> <b class="caret"></b></a>
+<!--                <li class="btn dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="glyphicon glyphicon-envelope"></i> <span class="text">Messages</span> <span class="label label-danger">5</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a class="sAdd" title="" href="#">new message</a></li>
                         <li><a class="sInbox" title="" href="#">inbox</a></li>
@@ -38,7 +38,7 @@
                         <li><a class="sTrash" title="" href="#">trash</a></li>
                     </ul>
                 </li>
-                <li class="btn"><a title="" href="#"><i class="glyphicon glyphicon-cog"></i> <span class="text">Settings</span></a></li>
+                <li class="btn"><a title="" href="#"><i class="glyphicon glyphicon-cog"></i> <span class="text">Settings</span></a></li>-->
                 <li class="btn"><a title="" href="<?php echo base_url(); ?>index.php/guidance/logout"><i class="glyphicon glyphicon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </div>

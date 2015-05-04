@@ -27,6 +27,7 @@ class Admin extends CI_Controller {
     }
     
     function halaman_login(){
+        if($this->session->userdata('role')) redirect('/guidance/home', 'location');
         $data['title'] = "Masuk - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -36,14 +37,14 @@ class Admin extends CI_Controller {
     
     function login(){
         $this->load->model('model_admin');
-        
+
         $this->form_validation->set_rules('username', 'Username', 'required');
-	$this->form_validation->set_rules('password', 'Password', 'required');
-        
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
         $this->form_validation->set_message('required','%s harus diisi.');
-        
-	if ($this->form_validation->run() == FALSE)
-	{
+
+        if ($this->form_validation->run() == FALSE)
+        {
             $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
@@ -51,30 +52,33 @@ class Admin extends CI_Controller {
                         . "</div>");
             $this->session->set_flashdata('warning',validation_errors());
             redirect('/guidance/login', 'location');
-	}
+        }
         else
-	{
+        {
             // check account, etc
             $username= $this->input->post('username');
             $password= $this->input->post('password');
             $logincheck = $this->model_admin->checkkaryawan($username, $password);
-            
+
             if ($logincheck)
             {
-                // set session
-                
+                $role=0;// 1 admin, 2 editor, 3 guru,4 member dst menyusul
+                $jabatan = $logincheck->jabatan;
+                if($jabatan == 'Administrator') $role=1;
+                else if($jabatan == 'Editor') $role=2;
+                else if($jabatan == 'Guru') $role=3;
+
                 $loginarray = array(
                     'username' => $logincheck->username,
                     'name' => $logincheck->nama,
-                    'lastlogin' => $logincheck->lastlogin,
-                    'role' => '1' // 1 admin, 2 member, 3,4 dst menyusul
+                    'role' => $role
                 );
                 $this->session->set_userdata($loginarray);
-                
+
                 // redirect to contact page + notification
                 $this->session->set_flashdata('home',true);
                 redirect('/guidance/home', 'location');
-                
+
             }
             else
             {
@@ -85,10 +89,10 @@ class Admin extends CI_Controller {
                         . "</div>";
                 $this->session->set_flashdata('warning',$warning);
                 redirect('/guidance/login', 'location');
-                
+
             }
-            
-	} 
+
+        }
     }
     
     function halaman_tambahpembimbing(){
@@ -273,7 +277,7 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('warning',$warning);
             redirect('/guidance/login', 'location'); 
         }
-        else if ($this->session->userdata('role') != '2') // not normal member
+        else if ($this->session->userdata('role') != '4') // not normal member
         {
             $this->session->set_flashdata('home',true);     
             $this->load->view('back/b_header',$data);

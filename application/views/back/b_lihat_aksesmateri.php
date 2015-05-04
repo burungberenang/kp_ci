@@ -27,8 +27,8 @@
                                                             foreach($materi->result() as $row){
                                                                 echo " <tr><td>".$row->namaKaryawan."</td>"
                                                                         . " <td>".$row->namaPelajaran."-".$row->namaKelas."</td>"
-                                                                        . " <td><a href='".base_url()."/aksesmateri/edit/".$row->idKaryawan."/".$row->idMateri."'>Edit</a>"
-                                                                        . " <a href='".base_url()."/aksesmateri/hapus/".$row->idKaryawan."/".$row->idMateri."'>Hapus</a></td></tr>";
+                                                                        . " <td><a href='".site_url()."/guidance/aksesmateri/edit/".$row->idKaryawan."/".$row->idMateri."'>Edit</a>"
+                                                                        . " <a href='".site_url()."/guidance/aksesmateri/hapus/".$row->idKaryawan."/".$row->idMateri."'>Hapus</a></td></tr>";
                                                             }
                                                         }
                                                     ?>

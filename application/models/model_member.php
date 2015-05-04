@@ -32,7 +32,7 @@ class Model_member extends CI_Model {
         if ($row->num_rows()==1)
         {
             //updatelastlogin($username);
-            return $row;
+            return $row->row();
         }
         else
         {

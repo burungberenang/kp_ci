@@ -44,7 +44,6 @@ class Member extends CI_Controller {
                 $loginarray = array(
                     'username' => $logincheck->username,
                     'name' => $logincheck->nama,
-                    'lastlogin' => $logincheck->lastlogin,
                     'role' => '4' // 1 admin, 2 editor, 3 guru,4 member
                 );
                 $this->session->set_userdata($loginarray);
@@ -64,7 +63,6 @@ class Member extends CI_Controller {
                 redirect('/masuk', 'location');
                 
             }
-            
 	}
     }
     
@@ -100,7 +98,7 @@ class Member extends CI_Controller {
 	{
             // insert database, etc
             $email = $this->input->post('email');
-            $pass = $this->input->post('password');
+            $pass = md5($this->input->post('password'));
             $nama = $this->input->post('nama');
             $username = $this->input->post('user');
             

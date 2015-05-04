@@ -31,8 +31,8 @@
                                                                         . " <td>".$row->namaSubbab."</td>"
                                                                         . " <td>".$row->link."</td>"
                                                                         . " <td>".$row->deskripsi."</td>"
-                                                                        . " <td><a href='".base_url()."/subbab/edit/".$row->id."'>Edit</a>"
-                                                                        . " <a href='".base_url()."/subbab/hapus/".$row->id."'>Hapus</a></td>"
+                                                                        . " <td><a href='".site_url()."/guidance/subbab/edit/".$row->id."'>Edit</a>"
+                                                                        . " <a href='".site_url()."/guidance/subbab/hapus/".$row->id."'>Hapus</a></td>"
                                                                         . " </tr>";
                                                             }
                                                         }

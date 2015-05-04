@@ -27,8 +27,8 @@
                                                             foreach($bab->result() as $row){
                                                                 echo " <tr><td>".$row->namaBab."</td>"
                                                                         . " <td>".$row->namaPelajaran."-".$row->namaKelas."</td>"
-                                                                        . " <td><a href='".base_url()."/bab/edit/".$row->id."'>Edit</a>"
-                                                                        . " <a href='".base_url()."/bab/hapus/".$row->id."'>Hapus</a></td></tr>";
+                                                                        . " <td><a href='".site_url()."/guidance/bab/edit/".$row->id."'>Edit</a>"
+                                                                        . " <a href='".site_url()."/guidance/bab/hapus/".$row->id."'>Hapus</a></td></tr>";
                                                             }
                                                         }
                                                     ?>

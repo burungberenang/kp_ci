@@ -66,7 +66,7 @@ class Admin extends CI_Controller {
                 $jabatan = $logincheck->jabatan;
                 if($jabatan == 'Administrator') $role=1;
                 else if($jabatan == 'Editor') $role=2;
-                else if($jabatan == 'Guru') $role=3;
+                else if($jabatan == 'Pembimbing') $role=3;
 
                 $loginarray = array(
                     'username' => $logincheck->username,

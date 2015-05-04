@@ -432,4 +432,25 @@ class Model_material extends CI_Model {
             return "success";
         }
     }
+    
+    function hapus_materi($id){
+        $this->db->trans_start();
+        $this->db->query("DELETE FROM historybayar WHERE idPaket IN (SELECT p.id FROM paket p INNER JOIN materi m ON p.idMateri=m.id WHERE m.id=".$id.")");
+        $this->db->query("DELETE FROM subbab WHERE idBab IN (SELECT b.id FROM bab b INNER JOIN materi m ON b.idMateri=m.id WHERE m.id=".$id.")");
+        $this->db->query("DELETE FROM paket WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM bab WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM aksesmateri WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM materi WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 }

@@ -796,6 +796,10 @@ class Material extends CI_Controller {
     function lihatMateri(){
         if($this->session->userdata('role')==1)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_materi($this->input->post('id'));
+                redirect('guidance/materi/semua', 'refresh');
+            }
             $data['title']='Lihat Materi A+ Learning';
             $data['title2']='Lihat Materi';
             

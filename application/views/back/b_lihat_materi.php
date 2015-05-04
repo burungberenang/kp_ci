@@ -28,7 +28,26 @@
                                                     <td><?php echo $value['pelajaran'];?></td>
                                                     <td>
                                                         <a class="btn btn-primary" href="<?php echo site_url().'/guidance/materi/edit/'.$value['id'];?>">Edit</a> 
-                                                        <a class="btn btn-danger" href="#">Delete</a>
+                                                        <a href="#myModal<?php echo $value['id']; ?>" data-toggle="modal" class="btn btn-danger">Delete</a>
+                                                        <!-- MODAL -->
+                                                        <div id="myModal<?php echo $value['id']; ?>" class="modal fade">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                                                        <h3>Anda yakin untuk menghapus data?</h3><br>
+                                                                        <h3><strong>PERHATIAN: Data yang berhubungan akan juga terhapus!</strong></h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post" action="<?php echo current_url(); ?>">
+                                                                            <input type="hidden" name="id" value="<?php echo $value['id']; ?>">
+                                                                            <input class="btn btn-success" name="hapus" type="submit" value="Ya">
+                                                                            <input class="btn btn-danger" type="submit" value="Tidak">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                         <?php endforeach; ?>

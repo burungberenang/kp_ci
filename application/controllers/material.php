@@ -99,7 +99,7 @@ class Material extends CI_Controller {
             $idBab = $this->input->post('idBab');
             $idSubbab = $this->input->post('idSubbab');
             
-            $status = $this->model_material->edit_subbab($nama,$link,$deskripsi,$idBab,$idSubbab);
+            $status = $this->model_material->edit_subbab($idSubbab,$nama,$link,$deskripsi,$idBab);
 
             if ($status == "success")
             {

@@ -155,7 +155,7 @@ class Model_material extends CI_Model {
         $this->load->database('default');
         $query = $this->db->query($sql);
         
-        return $query;
+        return $query->row();
     }
     
     function get_detail_materi($id){

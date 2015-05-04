@@ -21,14 +21,14 @@
                                     <div class="form-group">
 					<label class="control-label">Karyawan Lama</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama" value="<?php echo $karyawanlama->id.'-'.$karyawanlama->nama; ?>" required/>
+                                            <input type="text" class="form-controlreadonly input-small" placeholder="Nama Bab" name="nama" value="<?php echo $karyawanlama->id.'-'.$karyawanlama->nama; ?>" required/>
 					</div>
                                     </div>
                                 
                                     <div class="form-group">
                                         <label class="control-label">Materi Lama</label>
                                         <div class="controls">
-                                            <textarea class="form-control">
+                                            <textarea class="form-control" readonly>
                                                 <?php
                                                     if ($materilama){
                                                     foreach($materilama->result() as $row){

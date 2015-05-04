@@ -172,7 +172,7 @@ class Model_material extends CI_Model {
     }
     
     function get_detail_subbab($id){
-        $sql = "SELECT id, nama, link, deskripsi idBab "
+        $sql = "SELECT id, nama, link, deskripsi, idBab "
                 . " FROM subbab"
                 . " WHERE id = ".$id;
                 

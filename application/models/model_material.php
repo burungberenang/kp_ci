@@ -183,11 +183,11 @@ class Model_material extends CI_Model {
     }
     
     function get_all_aksesmateri_detail(){
-        $sql = "SELECT k1.id as idKaryawan, m.id as idMateri, k1.nama as namaKaryawan,p.nama as namaPelajaran, k2.nama as namaKelas FROM aksesmateri"
-                . " INNER JOIN karyawan k1 "
-                . " INNER JOIN materi m"
-                . " INNER JOIN pelajaran p"
-                . " INNER JOIN kelas k2 ";
+        $sql = "SELECT k1.id as idKaryawan, m.id as idMateri, k1.nama as namaKaryawan,p.nama as namaPelajaran, k2.nama as namaKelas FROM aksesmateri a "
+                . " INNER JOIN karyawan k1 on k1.id=a.idKaryawan "
+                . " INNER JOIN materi m on m.id = a.idMateri "
+                . " INNER JOIN pelajaran p on p.id = m.idPelajaran "
+                . " INNER JOIN kelas k2 on k2.id = m.idKelas";
                 
         $this->load->database('default');
         $query = $this->db->query($sql);
@@ -209,7 +209,7 @@ class Model_material extends CI_Model {
     
     function get_all_subbab_detail(){
         $sql = "SELECT s.id as id, s.nama as namaSubbab, s.link as link, s.deskripsi as deskripsi, b.nama as namaBab FROM subbab s "
-                . " INNER JOIN bab b";
+                . " INNER JOIN bab b on s.idBab = b.id";
                 
         $this->load->database('default');
         $query = $this->db->query($sql);
@@ -228,8 +228,8 @@ class Model_material extends CI_Model {
     
     function get_all_materi(){
         $sql = "SELECT m.id as idMateri, p.nama as namaPelajaran, k.nama as namaKelas FROM materi m"
-                . " INNER JOIN pelajaran p"
-                . " INNER JOIN kelas k ";
+                . " INNER JOIN pelajaran p on m.idPelajaran = p.id"
+                . " INNER JOIN kelas k on k.id = m.idKelas ";
                 
         $this->load->database('default');
         $query = $this->db->query($sql);

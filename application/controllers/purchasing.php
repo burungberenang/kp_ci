@@ -155,7 +155,7 @@ class Purchasing extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/paket/edit'.$id,'refresh');
+                    redirect('guidance/paket/edit/'.$id,'refresh');
                 }
             }
             $data['title']='Edit Paket A+ Learning';

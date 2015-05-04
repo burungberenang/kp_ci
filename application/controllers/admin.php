@@ -111,6 +111,7 @@ class Admin extends CI_Controller {
                 
         $this->load->library('upload');
         $this->load->library('image_lib');
+        $this->load->helper('security');
         
         //set validation rules and message
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -165,16 +166,38 @@ class Admin extends CI_Controller {
             }
             else
             {
+                $data = $this->upload->data();		
+                $config = array();			
+
+                // CREATE THUMBNAIL
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './foto/'.$data['file_name'];
+                $config['create_thumb'] = TRUE;
+                $config['thumb_marker'] = "_thumb";
+                $config['maintain_ratio'] = TRUE;
+                $config['width'] = 75;
+                $config['height'] = 50;
+                $this->image_lib->initialize($config); 
+                if(!$this->image_lib->resize()) {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>".$this->image_lib->display_errors()."</strong> "
+                                . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location');
+                }
+                
                 // insert database, etc
                 $username = $this->input->post('username');
-                $password = $this->input->post('password');
+                $password = do_hash($this->input->post('password'),'md5');
                 $noKTP = $this->input->post('noKTP');
                 $nama = $this->input->post('nama');
                 $alamat = $this->input->post('alamat');
                 $tglLahir = $this->input->post('tglLahir');
                 $jabatan = $this->input->post('jabatan');
-                $data = $this->upload->data();
-                $linkfoto = $data['file_name'];
+                
+                $linkfoto = $data['raw_name'].'_thumb'.$data['file_ext'];
 
                 $status = $this->model_admin->registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$linkfoto);
 

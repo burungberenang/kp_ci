@@ -20,7 +20,7 @@
                                 
                                     <div class="form-group">
 					<div class="controls">
-                                            <input type="hidden" value="<?php echo $bab->id; ?>"></input>
+                                            <input type="hidden" name="idBab" value="<?php echo $bab->id; ?>"></input>
 					</div>
                                     </div>
                                 

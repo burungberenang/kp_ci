@@ -19,9 +19,8 @@
                                     echo form_open("guidance/subbab/checkedit",$attributes); ?>
                                 
                                     <div class="form-group">
-					<label class="control-label">ID</label>
 					<div class="controls">
-                                            <label class="control-label"><?php echo $subbab->id; ?></label>
+                                            <input type="hidden" name="idSubbab" value="<?php echo $subbab->id; ?>">
 					</div>
                                     </div>
                                 

@@ -357,7 +357,7 @@ class Material extends CI_Controller {
     }
         
     function tambahPelajaran(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 //buat rule form validation
@@ -411,7 +411,7 @@ class Material extends CI_Controller {
     }
     
     function lihatPelajaran(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             $data['title']='Lihat Pelajaran A+ Learning';
             $data['title2']='Lihat Pelajaran';
@@ -428,7 +428,7 @@ class Material extends CI_Controller {
     }
     
     function editPelajaran($id){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 //buat rule form validation
@@ -486,7 +486,7 @@ class Material extends CI_Controller {
         
     
     function tambahKelas(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 //buat rule form validation
@@ -540,7 +540,7 @@ class Material extends CI_Controller {
     }
     
     function lihatKelas(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             $data['title']='Lihat Kelas A+ Learning';
             $data['title2']='Lihat Kelas';
@@ -557,7 +557,7 @@ class Material extends CI_Controller {
     }
     
     function editKelas($id){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 //buat rule form validation
@@ -619,7 +619,7 @@ class Material extends CI_Controller {
     
     
     function tambahMateri(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 //cek ketersediaan materi
@@ -676,7 +676,7 @@ class Material extends CI_Controller {
     }
     
     function lihatMateri(){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1)
         {
             $data['title']='Lihat Materi A+ Learning';
             $data['title2']='Lihat Materi';
@@ -693,7 +693,7 @@ class Material extends CI_Controller {
     }
     
     function editMateri($id){
-        if($this->session->userdata('role'))
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
                 

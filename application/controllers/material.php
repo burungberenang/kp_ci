@@ -531,6 +531,10 @@ class Material extends CI_Controller {
     function lihatPelajaran(){
         if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_pelajaran($this->input->post('id'));
+                redirect('guidance/pelajaran/semua', 'refresh');
+            }
             $data['title']='Lihat Pelajaran A+ Learning';
             $data['title2']='Lihat Pelajaran';
             
@@ -660,6 +664,10 @@ class Material extends CI_Controller {
     function lihatKelas(){
         if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_kelas($this->input->post('id'));
+                redirect('guidance/kelas/semua', 'refresh');
+            }
             $data['title']='Lihat Kelas A+ Learning';
             $data['title2']='Lihat Kelas';
             

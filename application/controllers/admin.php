@@ -26,6 +26,247 @@ class Admin extends CI_Controller {
         redirect('/guidance/login', 'location');
     }
     
+    function profile(){
+        if(!$this->session->userdata('role')) redirect('/guidance/home', 'location');
+        $this->load->model('model_admin');
+        $this->load->library('upload');
+        $this->load->library('image_lib');
+        if($this->input->post('ganti')){
+            if (!$this->upload->do_upload('foto'))
+            {
+                $data = $this->upload->data();
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$this->upload->display_errors()."</strong> "
+                            . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/profile', 'location');
+            }
+            else
+            {
+                $data = $this->upload->data();		
+                $config = array();			
+
+                // CREATE THUMBNAIL
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './foto/'.$data['file_name'];
+                $config['create_thumb'] = TRUE;
+                $config['thumb_marker'] = "_thumb";
+                $config['maintain_ratio'] = TRUE;
+                $config['width'] = 75;
+                $config['height'] = 50;
+                $this->image_lib->initialize($config); 
+                if(!$this->image_lib->resize()) {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>".$this->image_lib->display_errors()."</strong> "
+                                . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile', 'location');
+                }
+                
+                // insert database, etc
+                $username = $this->session->userdata('username');
+                $linkfoto = $data['raw_name'].'_thumb'.$data['file_ext'];
+
+                $status = $this->model_admin->edit_foto($username,$linkfoto);
+
+                if ($status == "success")
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Foto telah berhasil diubah.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile', 'location');
+                }
+                else if ($status == "connection_failed")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile', 'location');
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$status."</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile', 'location'); 
+                }
+            }
+        }
+        
+        $data['title'] = "Profil - A+ Learning Guidance";        
+        $data['user'] = $this->model_admin->get_profile($this->session->userdata('username'));
+        
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_profile',$data);
+        $this->load->view('back/b_footer');
+    }
+    
+    function editProfile(){
+        if(!$this->session->userdata('role')) redirect('/guidance/home', 'location');
+        $this->load->model('model_admin');
+        if($this->input->post('simpan')){
+            //buat rule form validation
+            $this->form_validation->set_rules('nama', 'Nama', 'required');
+            $this->form_validation->set_rules('noktp', 'No KTP', 'required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('tgllahir', 'Tanggal Lahir', 'required');
+            if($this->form_validation->run()==false){
+
+                //munculkan error kalau validasi salah
+                $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                    . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                    . "<span class='sr-only'>Close</span>"
+                    . "</button><strong>", "</strong> "
+                    . "</div>");
+                $this->session->set_flashdata('warning',validation_errors());
+
+                redirect('guidance/profile/edit/'.$id, 'location');
+            }else{
+                // insert database, etc
+                $user = $this->session->userdata('username');
+                $nama = $this->input->post('nama');
+                $noKTP = $this->input->post('noktp');
+                $alamat = $this->input->post('alamat');
+                $tglLahir = $this->input->post('tgllahir');
+
+                $status = $hasil=$this->model_admin->edit_profile($user, $nama, $noKTP, $alamat, $tglLahir);
+
+                if ($status == "success")
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile/edit', 'location');
+                }
+                else if ($status == "connection_failed")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile/edit', 'location');
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$status."</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile/edit', 'location'); 
+                }
+            }
+        }
+        $data['title'] = "Edit Profil - A+ Learning Guidance";
+        $this->load->model('model_admin');
+        
+        $data['user'] = $this->model_admin->get_profile($this->session->userdata('username'));
+        
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_edit_profile',$data);
+        $this->load->view('back/b_footer');
+    }
+    
+    function editPassword(){
+        if(!$this->session->userdata('role')) redirect('/guidance/home', 'location');
+        $this->load->model('model_admin');
+        $this->load->helper('security');
+        if($this->input->post('simpan')){
+            //buat rule form validation
+            $this->form_validation->set_rules('lama', 'Password Lama', 'required');
+            $this->form_validation->set_rules('baru', 'Password Baru', 'required|matches[ulangi]');
+            $this->form_validation->set_rules('ulangi', 'Ulangi Password Baru', 'required');            
+            if($this->form_validation->run()==false){
+
+                //munculkan error kalau validasi salah
+                $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                    . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                    . "<span class='sr-only'>Close</span>"
+                    . "</button><strong>", "</strong> "
+                    . "</div>");
+                $this->session->set_flashdata('warning',validation_errors());
+
+                redirect('guidance/profile/password/'.$id, 'location');
+            }else{
+                $user = $this->session->userdata('username');
+                // insert database, etc
+                $lama = do_hash($this->input->post('lama'),'md5');
+                $baru = do_hash($this->input->post('baru'),'md5');
+                $ulangi = do_hash($this->input->post('ulangi'),'md5');
+                
+                //cek password lama
+                if($this->model_admin->cek_password($user,$lama)){
+                    $status = $hasil=$this->model_admin->edit_password($user, $baru);
+
+                    if ($status == "success")
+                    {
+                        $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>Password telah berhasil diubah.</strong> "
+                                . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                        redirect('/guidance/profile/password', 'location');
+                    }
+                    else if ($status == "connection_failed")
+                    {
+                        $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                                . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                        redirect('/guidance/profile/password', 'location');
+                    }
+                    else
+                    {
+                        $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>".$status."</strong> "
+                                . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                        redirect('/guidance/profile/password', 'location'); 
+                    }
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Password Lama salah</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/profile/password', 'location'); 
+                }
+            }
+        }
+        
+        $data['title'] = "Ganti Password - A+ Learning Guidance";
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_edit_password');
+        $this->load->view('back/b_footer');
+    }
+    
     function halaman_login(){
         if($this->session->userdata('role')) redirect('/guidance/home', 'location');
         $data['title'] = "Masuk - A+ Learning Guidance";

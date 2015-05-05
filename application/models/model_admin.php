@@ -136,4 +136,87 @@ class Model_admin extends CI_Model {
         
     }
     
+    function get_profile($user){
+        $this->load->database('default');
+        $result = $this->db->query(" SELECT noKTP, nama, alamat, tglLahir, jabatan, foto FROM karyawan WHERE username='".$user."' ");
+        return $result->row_array();
+    }
+    function edit_profile($user,$nama,$noKTP,$alamat,$tglLahir){
+        
+        $sql = " UPDATE karyawan "
+                . " SET nama=?,noKTP=?,alamat=?,tglLahir=? "
+                . " WHERE username = '".$user."'";
+        
+        $this->load->database('default');
+        
+        $this->db->trans_start();
+        $this->db->query($sql,array($nama,$noKTP,$alamat,$tglLahir));
+        $this->db->trans_complete();
+            
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
+    function edit_password($user,$pass){
+        
+        $sql = " UPDATE karyawan "
+                . " SET password=? "
+                . " WHERE username = '".$user."'";
+        
+        $this->load->database('default');
+        
+        $this->db->trans_start();
+        $this->db->query($sql,array($pass));
+        $this->db->trans_complete();
+            
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
+    
+    function cek_password($user,$pass){
+        $this->load->database('default');
+        $result = $this->db->query(" SELECT * FROM karyawan WHERE username = '".$user."' AND password = '".$pass."' ");
+        if($result->num_rows()>0){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    function edit_foto($username,$linkfoto){
+        $sql = " UPDATE karyawan "
+                . " SET foto=? "
+                . " WHERE username = '".$username."'";
+        
+        $this->load->database('default');
+        
+        $this->db->trans_start();
+        $this->db->query($sql,array($linkfoto));
+        $this->db->trans_complete();
+            
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 }

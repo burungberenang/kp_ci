@@ -59,6 +59,7 @@ Class Model_purchasing extends CI_Model
     }
     function hapus_paket($id){
         $this->db->trans_start();
+        $this->db->query("DELETE FROM historybayar WHERE idPaket=".$id);
         $this->db->query("DELETE FROM paket WHERE id=".$id);
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE)

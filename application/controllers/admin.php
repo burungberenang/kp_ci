@@ -107,10 +107,14 @@ class Admin extends CI_Controller {
     
     function tambahpembimbing(){
         //load model
-        $this->load->model('model_admin');
-                
-        $this->load->library('upload');
-        $this->load->library('image_lib');
+        $this->load->model('model_admin');   
+        
+        $config1['upload_path'] = './foto/';
+        $config1['allowed_types'] = 'gif|jpg|png';
+        $config1['remove_spaces'] = TRUE;
+        $config1['encrypt_name'] = TRUE;
+        
+        $this->load->library('upload', $config1);
         
         //set validation rules and message
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -175,8 +179,23 @@ class Admin extends CI_Controller {
                 $jabatan = $this->input->post('jabatan');
                 $data = $this->upload->data();
                 $linkfoto = $data['file_name'];
-
-                $status = $this->model_admin->registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$linkfoto);
+                
+                $config['image_library'] = 'gd2';
+                $config['create_thumb'] = TRUE;
+                $config['width'] = 100;
+                $config['height'] = 100; 
+                $config['source_image']	= "./foto/".$linkfoto;
+                $config['maintain_ratio'] = TRUE;
+                
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+                
+                $pisah = explode('.',$linkfoto);
+                $linkfotobaru = $pisah[0]."_thumb.".$pisah[1];
+                
+                $status = $this->model_admin->registerkaryawan($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$linkfotobaru);
 
                 if ($status == "success")
                 {
@@ -235,12 +254,120 @@ class Admin extends CI_Controller {
         $this->load->view('back/b_footer'); 
     }
     
-    function halaman_editpembimbing(){
+    function halaman_editpembimbing($idPembimbing){
+        $data['title']="Edit Pembimbing - A+ Learning Guidance";
+        $this->load->library('form_validation');
+        $this->load->helper('form');
         
+        $this->load->model('model_admin');
+        
+        $data['pembimbing'] = $this->model_admin->get_detail_karyawan($idPembimbing);
+        
+        $this->load->view('back/b_header',$data);
+        $this->load->view('back/b_edit_pembimbing');
+        $this->load->view('back/b_footer');   
     }
     
     function editpembimbing(){
+        $this->load->model('model_admin');
         
+	$this->form_validation->set_rules('password', 'Password', 'required|matches[confpass]');
+        $this->form_validation->set_rules('confpass', 'Ulang Password', 'required');
+        $this->form_validation->set_rules('noKTP', 'Nomor KTP', 'required|numeric');
+	$this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        
+        $this->form_validation->set_message('required','%s harus diisi.');
+        $this->form_validation->set_message('numeric','%s harus dalam angka (0-9)');
+        $this->form_validation->set_message('valid_email','Masukkan alamat e-mail Anda');
+        $this->form_validation->set_message('matches[confpass]','Ulang Password tidak sesuai dengan password Anda.');
+        
+        if ($this->form_validation->run() == FALSE)
+	{
+            $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>", "</strong> "
+                        . "</div>");
+            $this->session->set_flashdata('warning',validation_errors());
+            redirect('/guidance/pembimbing/edit/'.$this->input->post('idPembimbing'), 'location');
+	}
+        else
+	{
+            if (!$this->upload->do_upload('link'))
+            {
+                $data = $this->upload->data();
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$this->upload->display_errors()."</strong> "
+                            . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/pembimbing/edit/'.$this->input->post('idPembimbing'), 'location');
+            }
+            else
+            {
+                // insert database, etc
+                $id = $this->input->post('idPembimbing');
+                $password = $this->input->post('password');
+                $noKTP = $this->input->post('noKTP');
+                $nama = $this->input->post('nama');
+                $alamat = $this->input->post('alamat');
+                $tglLahir = $this->input->post('tglLahir');
+                $jabatan = $this->input->post('jabatan');
+                $data = $this->upload->data();
+                $linkfoto = $data['file_name'];
+                
+                $config['image_library'] = 'gd2';
+                $config['create_thumb'] = TRUE;
+                $config['width'] = 100;
+                $config['height'] = 100; 
+                $config['source_image']	= "./foto/".$linkfoto;
+                $config['maintain_ratio'] = TRUE;
+                
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+                
+                $pisah = explode('.',$linkfoto);
+                $linkfotobaru = $pisah[0]."_thumb.".$pisah[1];
+                
+                $status = $this->model_admin->edit_data_karyawan($id,$noKTP,$nama,$alamat,$password,$tglLahir,$jabatan,$linkfotobaru);
+
+                if ($status == "success")
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Data karyawan berhasil diubah.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/semua', 'location');
+                }
+                else if ($status == "connection_error")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/semua', 'location');
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$status."</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/pembimbing/tambah', 'location'); 
+                }
+            }
+        }
     }
     
     

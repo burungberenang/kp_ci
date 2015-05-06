@@ -408,7 +408,7 @@ class Material extends CI_Controller {
                 $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                        . "</button><strong>Data bab berhasil ditambahkan.</strong> "
                         . "</div>";
                 $this->session->set_flashdata('warning',$warning);
                 redirect('/guidance/bab/tambah', 'location');
@@ -460,7 +460,7 @@ class Material extends CI_Controller {
                 $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                        . "</button><strong>Data sub-bab berhasil ditambahkan.</strong> "
                         . "</div>";
                 $this->session->set_flashdata('warning',$warning);
                 redirect('/guidance/subbab/tambah', 'location');
@@ -508,7 +508,7 @@ class Material extends CI_Controller {
                 $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                        . "</button><strong>Hak akses materi berhasil ditambahkan.</strong> "
                         . "</div>";
                 $this->session->set_flashdata('warning',$warning);
                 redirect('/guidance/aksesmateri/tambah', 'location');
@@ -561,7 +561,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Pelajaran berhasil didaftarkan</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
@@ -634,7 +634,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Pelajaran berhasil diubah</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
@@ -694,7 +694,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Kelas berhasil ditambahkan</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
@@ -767,7 +767,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Kelas berhasil diubah</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
@@ -830,7 +830,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Materi berhasil didaftarkan</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
@@ -906,7 +906,7 @@ class Material extends CI_Controller {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</button><strong>Materi berhasil diubah</strong> "
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }

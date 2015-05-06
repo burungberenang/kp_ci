@@ -186,7 +186,11 @@ class Material extends CI_Controller {
         $this->load->helper('form');
         
         $this->load->model('model_material');
-        $data['bab'] = $this->model_material->get_all_bab_detail();
+        if($this->session->userdata('role')==3){
+            $data['bab'] = $this->model_material->get_bab_pembimbing($this->session->userdata('username'));
+        }else{
+            $data['bab'] = $this->model_material->get_all_bab_detail();
+        }
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_lihat_bab');
@@ -200,7 +204,11 @@ class Material extends CI_Controller {
         $this->load->helper('form');
         
         $this->load->model('model_material');
-        $data['subbab'] = $this->model_material->get_all_subbab_detail();
+        if($this->session->userdata('role')==3){
+            $data['subbab'] = $this->model_material->get_subbab_pembimbing($this->session->userdata('username'));
+        }else{
+            $data['subbab'] = $this->model_material->get_all_subbab_detail();
+        }
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_lihat_subbab');

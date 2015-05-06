@@ -25,11 +25,35 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <script>
+                                                    function pause(temp){
+                                                        temp.pause();
+                                                    }
+                                                </script>
                                                 <?php foreach($subbab->result() as $row):?>
                                                 <tr>
                                                     <td><?php echo $row->namaBab ?></td>
                                                     <td><?php echo $row->namaSubbab ?></td>
-                                                    <td><?php echo $row->link ?></td>
+                                                    <td>
+                                                        <a href="#myModal<?php echo $row->id; ?>" data-toggle="modal" class="btn btn-link"><?php echo $row->link ?></a>
+                                                        <!-- MODAL -->
+                                                        <div id="myModal<?php echo $row->id; ?>" class="modal fade" onclick="pause(videoku<?php echo $row->id; ?>)">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content" style="text-align: center">
+                                                                    <div class="modal-header">
+                                                                        <button data-dismiss="modal" class="close" type="button" onclick="pause(videoku<?php echo $row->id; ?>)">×</button>
+                                                                        <h3>Video</h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <video width="480" id="videoku<?php echo $row->id; ?>" controls>
+                                                                            <source src="<?php echo base_url().'video/'.$row->link ?>" type="video/mp4">
+                                                                            Your browser does not support the video tag.
+                                                                        </video>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td><?php echo $row->deskripsi?></td>
                                                     <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
                                                         <td><a href='<?php echo site_url()?>/guidance/subbab/edit/<?php echo $row->id ?>'>Edit</a>

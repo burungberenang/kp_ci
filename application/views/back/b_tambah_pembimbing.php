@@ -11,8 +11,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="widget-box">
-                            <?php if ($this->session->flashdata('warning'))
-                                {  echo $this->session->flashdata('warning'); }?>
+                            <?php $datalama = $this->session->flashdata('datalama'); 
+                            if ($this->session->flashdata('warning'))
+                                {  echo $this->session->flashdata('warning');
+                                 }?>
                                 
                             <div class="widget-content">
                                 <?php $attributes = array('class' => 'form-horizontal'); 
@@ -21,7 +23,7 @@
                                     <div class="form-group">
 					<label class="control-label">Username</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Username" name="username" required/>
+                                            <input type="text" class="form-control input-small" placeholder="Username" name="username" value="<?php if ($datalama['username']) echo $datalama['username']; ?>" required/>
 					</div>
                                     </div>
                                 
@@ -42,28 +44,28 @@
                                     <div class="form-group">
 					<label class="control-label">Nomor KTP</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nomor KTP" name="noKTP" required/>
+                                            <input type="text" class="form-control input-small" placeholder="Nomor KTP" name="noKTP" value="<?php if ($datalama['noKTP']) echo $datalama['noKTP']; ?>" required/>
 					</div>
                                     </div>
                                     
                                     <div class="form-group">
 					<label class="control-label">Nama</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nama" name="nama" required/>
+                                            <input type="text" class="form-control input-small" placeholder="Nama" name="nama" value="<?php if ($datalama['nama']) echo $datalama['nama']; ?>" required/>
 					</div>
                                     </div>
                                     
                                     <div class="form-group">
 					<label class="control-label">Alamat</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Alamat" name="alamat" required/>
+                                            <input type="text" class="form-control input-small" placeholder="Alamat" name="alamat" value="<?php if ($datalama['alamat']) echo $datalama['alamat']; ?>" required/>
 					</div>
                                     </div>
                                     
                                     <div class="form-group">
 					<label class="control-label">Tanggal Lahir</label>
 					<div class="controls">
-                                            <input type="date" class="form-control input-small" placeholder="Tanggal Lahir" name="tglLahir" required/>
+                                            <input type="date" class="form-control input-small" placeholder="Tanggal Lahir" name="tglLahir" value="<?php if ($datalama['tglLahir']) echo $datalama['tglLahir']; ?>" required/>
 					</div>
                                     </div>
                                     
@@ -71,9 +73,9 @@
 					<label class="control-label">Jabatan</label>
                                             <div class="controls">
 						<select name="jabatan">
-                                                    <option value="Administrator">Administrator</option>
-                                                    <option value="Editor">Editor</option>
-                                                    <option value="Pembimbing">Pembimbing</option>
+                                                    <option value="Administrator" <?php if ($datalama['jabatan'] == "Administrator") echo 'checked';  ?>>Administrator</option>
+                                                    <option value="Editor" <?php if ($datalama['jabatan'] == "Editor") echo 'checked';  ?>>Editor</option>
+                                                    <option value="Pembimbing" <?php if ($datalama['jabatan'] == "Pembimbing") echo 'checked';  ?>>Pembimbing</option>
 						</select>
                                             </div>
                                     </div>

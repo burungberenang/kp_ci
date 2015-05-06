@@ -383,11 +383,18 @@ class Admin extends CI_Controller {
                         . "</button><strong>", "</strong> "
                         . "</div>");
             $this->session->set_flashdata('warning',validation_errors());
+            $datalama = array('username'=>$this->input->post('username'),
+                'nama'=>$this->input->post('nama'),
+                'noKTP'=>$this->input->post('noKTP'),
+                'alamat'=>$this->input->post('alamat'),
+                'jabatan'=>$this->input->post('jabatan'),
+                'tglLahir'=>$this->input->post('tglLahir'));
+            $this->session->set_flashdata('datalama',$datalama);
             redirect('/guidance/pembimbing/tambah', 'location');
 	}
         else
 	{
-            if (!$this->upload->do_upload('link') && !$this->model_admin->checkusername($this->input->post('username')))
+            if (!$this->upload->do_upload('link') || !$this->model_admin->checkusername($this->input->post('username')))
             {
                 if (!$this->model_admin->checkusername($this->input->post('username'))){
                     $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
@@ -396,6 +403,13 @@ class Admin extends CI_Controller {
                             . "</button><strong>Username telah terpakai</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning',$warning);
+                    $datalama = array('username'=>$this->input->post('username'),
+                        'nama'=>$this->input->post('nama'),
+                        'noKTP'=>$this->input->post('noKTP'),
+                        'alamat'=>$this->input->post('alamat'),
+                        'jabatan'=>$this->input->post('jabatan'),
+                        'tglLahir'=>$this->input->post('tglLahir'));
+                    $this->session->set_flashdata('datalama',$datalama);
                     redirect('/guidance/pembimbing/tambah', 'location');
                 }
                 else{
@@ -406,12 +420,18 @@ class Admin extends CI_Controller {
                                 . "</button><strong>".$this->upload->display_errors()."</strong> "
                                 . "</div>";
                     $this->session->set_flashdata('warning',$warning);
+                    $datalama = array('username'=>$this->input->post('username'),
+                        'nama'=>$this->input->post('nama'),
+                        'noKTP'=>$this->input->post('noKTP'),
+                        'alamat'=>$this->input->post('alamat'),
+                        'jabatan'=>$this->input->post('jabatan'),
+                        'tglLahir'=>$this->input->post('tglLahir'));
+                    $this->session->set_flashdata('datalama',$datalama);
                     redirect('/guidance/pembimbing/tambah', 'location');
                 }
             }
             else
             {
-                
                 // insert database, etc
                 $username = $this->input->post('username');
                 $password = md5($this->input->post('password'));
@@ -459,6 +479,13 @@ class Admin extends CI_Controller {
                             . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning',$warning);
+                    $datalama = array('username'=>$this->input->post('username'),
+                        'nama'=>$this->input->post('nama'),
+                        'noKTP'=>$this->input->post('noKTP'),
+                        'alamat'=>$this->input->post('alamat'),
+                        'jabatan'=>$this->input->post('jabatan'),
+                        'tglLahir'=>$this->input->post('tglLahir'));
+                    $this->session->set_flashdata('datalama',$datalama);
                     redirect('/guidance/pembimbing/tambah', 'location');
                 }
                 else if ($status == "username_invalid")
@@ -469,6 +496,13 @@ class Admin extends CI_Controller {
                             . "</button><strong>Username telah terpakai, silahkan coba username lain.</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning',$warning);
+                    $datalama = array('username'=>$this->input->post('username'),
+                        'nama'=>$this->input->post('nama'),
+                        'noKTP'=>$this->input->post('noKTP'),
+                        'alamat'=>$this->input->post('alamat'),
+                        'jabatan'=>$this->input->post('jabatan'),
+                        'tglLahir'=>$this->input->post('tglLahir'));
+                    $this->session->set_flashdata('datalama',$datalama);
                     redirect('/guidance/pembimbing/tambah', 'location');    
                 }
                 else
@@ -479,6 +513,13 @@ class Admin extends CI_Controller {
                             . "</button><strong>".$status."</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning',$warning);
+                    $datalama = array('username'=>$this->input->post('username'),
+                        'nama'=>$this->input->post('nama'),
+                        'noKTP'=>$this->input->post('noKTP'),
+                        'alamat'=>$this->input->post('alamat'),
+                        'jabatan'=>$this->input->post('jabatan'),
+                        'tglLahir'=>$this->input->post('tglLahir'));
+                    $this->session->set_flashdata('datalama',$datalama);
                     redirect('/guidance/pembimbing/tambah', 'location'); 
                 }
             }

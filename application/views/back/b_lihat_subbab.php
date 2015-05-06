@@ -57,7 +57,26 @@
                                                     <td><?php echo $row->deskripsi?></td>
                                                     <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
                                                         <td><a class='btn btn-primary' href='<?php echo site_url()?>/guidance/subbab/edit/<?php echo $row->id ?>'>Edit</a>
-                                                        <a class='btn btn-danger' href='<?php echo site_url()?>/guidance/subbab/hapus/<?php echo $row->id ?>'>Hapus</a></td>
+                                                        <a href="#mModal<?php echo $row->id ?>" data-toggle="modal" class="btn btn-danger">Hapus</a>
+                                                        <!-- MODAL -->
+                                                        <div id="mModal<?php echo $row->id ?>" class="modal fade">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                                                        <h3>Anda yakin untuk menghapus data?</h3><br>
+                                                                        <h3><strong>PERHATIAN: Data yang berhubungan akan juga terhapus!</strong></h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post" action="<?php echo site_url()?>/guidance/subbab/hapus/<?php echo $row->id ?>">
+                                                                            <input class="btn btn-success" name="hapus" type="submit" value="Ya">
+                                                                            <button data-dismiss="modal" class="btn btn-danger" type="button">Tidak</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <?php endif; ?>
                                                 </tr>
                                                 <?php endforeach; ?>

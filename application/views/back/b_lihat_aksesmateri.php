@@ -26,8 +26,26 @@
                                                     <td><?php echo $row->namaKaryawan; ?></td>
                                                     <td><?php echo $row->namaPelajaran."-".$row->namaKelas; ?></td>
                                                     <td><a class='btn btn-primary' href='<?php echo site_url(); ?>/guidance/aksesmateri/edit/<?php echo $row->idKaryawan."/".$row->idMateri; ?>'>Edit</a>
-                                                    <a class='btn btn-danger' href='<?php echo site_url(); ?>/guidance/aksesmateri/hapus/<?php echo $row->idKaryawan."/".$row->idMateri; ?>'>Hapus</a></td>
-                                                    
+                                                    <a href="#myModal<?php echo $row->idKaryawan.'-'.$row->idMateri; ?>" data-toggle="modal" class="btn btn-danger">Hapus</a>
+                                                        <!-- MODAL -->
+                                                        <div id="myModal<?php echo $row->idKaryawan.'-'.$row->idMateri; ?>" class="modal fade">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                                                        <h3>Anda yakin untuk menghapus data?</h3><br>
+                                                                        <h3><strong>PERHATIAN: Data yang berhubungan akan juga terhapus!</strong></h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post" action="<?php echo site_url(); ?>/guidance/aksesmateri/hapus/<?php echo $row->idKaryawan."/".$row->idMateri; ?>">
+                                                                            <input class="btn btn-success" name="hapus" type="submit" value="Ya">
+                                                                            <button data-dismiss="modal" class="btn btn-danger" type="button">Tidak</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach; ?>
 

@@ -123,14 +123,20 @@ class Material extends CI_Controller {
         }
     }
     
-    function edit_subbab($idSubbab, $nama, $link, $deskripsi, $idBab){
+    function edit_subbab(){
         if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('link', 'Link', 'required');
 	$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 	$this->form_validation->set_rules('idBab', 'ID Bab', 'required');
+        
+        $config1['upload_path'] = './video/';
+        $config1['allowed_types'] = 'mp4';
+        $config1['remove_spaces'] = TRUE;
+        $config1['encrypt_name'] = TRUE;
+        
+        $this->load->library('upload', $config1);
         
         $this->form_validation->set_message('required','%s harus diisi.');
         
@@ -146,13 +152,27 @@ class Material extends CI_Controller {
 	}
         else
 	{
+            if ($this->input->post('editvideo') == "true"){
+            if (!$this->upload->do_upload('link')){
+                $data = $this->upload->data();
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                                . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                                . "<span class='sr-only'>Close</span>"
+                                . "</button><strong>".$this->upload->display_errors()."</strong> "
+                                . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/guidance/subbab/tambah', 'location');
+            }
+            else {
             $nama = $this->input->post('nama');
-            $link = $this->input->post('link');
             $deskripsi = $this->input->post('deskripsi');
             $idBab = $this->input->post('idBab');
             $idSubbab = $this->input->post('idSubbab');
             
-            $status = $this->model_material->edit_subbab($idSubbab,$nama,$link,$deskripsi,$idBab);
+            $data = $this->upload->data();
+            $linkvideo = $data['file_name'];
+            
+            $status = $this->model_material->edit_subbab($idSubbab,$nama,$linkvideo,$deskripsi,$idBab);
 
             if ($status == "success")
             {
@@ -173,6 +193,37 @@ class Material extends CI_Controller {
                         . "</div>";
                 $this->session->set_flashdata('warning',$warning);
                 redirect('/guidance/subbab/semua', 'location');
+            }
+            }
+            }
+            else{
+                $nama = $this->input->post('nama');
+            $deskripsi = $this->input->post('deskripsi');
+            $idBab = $this->input->post('idBab');
+            $idSubbab = $this->input->post('idSubbab');
+
+            $status = $this->model_material->edit_subbab_tanpavideo($idSubbab,$nama,$deskripsi,$idBab);
+
+            if ($status == "success")
+            {
+                $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Data Sub-Bab berhasil diubah.</strong> "
+                        . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/subbab/semua', 'location');
+            }
+            else if ($status == "connection_failed")
+            {
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                        . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/subbab/semua', 'location');
+            }
             }
         }
     }

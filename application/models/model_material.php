@@ -146,6 +146,27 @@ class Model_material extends CI_Model {
             return "success";
         }
     }
+    
+    function edit_subbab_tanpavideo($idSubbab,$nama,$deskripsi,$idBab){
+        $sql = "UPDATE subbab SET nama=?, deskripsi=?, idBab=? WHERE id=?";
+        
+        $this->load->database('default');
+        
+        $this->db->trans_start();
+        $this->db->query($sql, array($nama,$deskripsi,$idBab,$idSubbab));
+        $this->db->trans_complete();
+        
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 
     function get_detail_karyawan($id){
         $sql = "SELECT id, nama "

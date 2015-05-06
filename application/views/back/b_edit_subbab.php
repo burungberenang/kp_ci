@@ -16,7 +16,7 @@
                                 
                             <div class="widget-content">
                                 <?php $attributes = array('class' => 'form-horizontal'); 
-                                    echo form_open("guidance/subbab/checkedit",$attributes); ?>
+                                    echo form_open_multipart("guidance/subbab/checkedit",$attributes); ?>
                                 
                                     <div class="form-group">
 					<div class="controls">
@@ -30,11 +30,19 @@
                                             <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama" value="<?php echo $subbab->nama; ?>" required/>
 					</div>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label">Ganti Link Video</label>
+                                        <div class="controls">
+                                            <label><input type="radio" name="editvideo" value ="true"/>Ya</label>
+                                            <label><input type="radio" name="editvideo" value ="false" checked/>Tidak</label>
+                                        </div>
+                                    </div>
                                 
                                     <div class="form-group">
 					<label class="control-label">Link</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Link" name="link" value="<?php echo $subbab->link; ?>" required/>
+                                            <input type="file" class="form-control input-small" placeholder="Link" name="link" value="<?php echo $subbab->link; ?>"/>
 					</div>
                                     </div>
                                 

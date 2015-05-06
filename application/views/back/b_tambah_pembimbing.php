@@ -81,7 +81,7 @@
                                     <div class="form-group">
 					<label class="control-label">Link Foto</label>
 					<div class="controls">
-                                            <input type="file" class="form-control input-small" placeholder="http://imgshack.us/123456" name="link" required/>
+                                            <input type="file" class="form-control input-small" name="link" required/>
 					</div>
                                     </div>
                                     

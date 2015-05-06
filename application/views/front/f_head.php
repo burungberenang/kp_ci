@@ -50,7 +50,7 @@
                         
                         <li><a href="<?php echo base_url(); ?>">Materiku</a></li>
                         <li><a href="<?php echo base_url(); ?>">Beli Materi</a></li>
-                        <li><a href="<?php echo site_url()."/logout.php" ?>">Keluar</a></li>
+                        <li><a href="<?php echo site_url()."/logout" ?>">Keluar</a></li>
                         
                     <?php endif; ?>
                         <li>

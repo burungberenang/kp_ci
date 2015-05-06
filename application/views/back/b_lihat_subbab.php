@@ -19,25 +19,24 @@
                                                     <th>Nama Sub-Bab</th>
                                                     <th>Link</th>
                                                     <th>Deskripsi</th>
-                                                    <th>Action</th>       
+                                                    <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
+                                                    <th>Action</th>
+                                                    <?php endif; ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
-                                                    <?php
-                                                        if ($subbab){
-                                                            foreach($subbab->result() as $row){
-                                                                echo " <tr><td>".$row->namaBab."</td>"
-                                                                        . " <td>".$row->namaSubbab."</td>"
-                                                                        . " <td>".$row->link."</td>"
-                                                                        . " <td>".$row->deskripsi."</td>"
-                                                                        . " <td><a href='".site_url()."/guidance/subbab/edit/".$row->id."'>Edit</a>"
-                                                                        . " <a href='".site_url()."/guidance/subbab/hapus/".$row->id."'>Hapus</a></td>"
-                                                                        . " </tr>";
-                                                            }
-                                                        }
-                                                    ?>
-
+                                                <?php foreach($subbab->result() as $row):?>
+                                                <tr>
+                                                    <td><?php echo $row->namaBab ?></td>
+                                                    <td><?php echo $row->namaSubbab ?></td>
+                                                    <td><?php echo $row->link ?></td>
+                                                    <td><?php echo $row->deskripsi?></td>
+                                                    <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
+                                                        <td><a href='<?php echo site_url()?>/guidance/subbab/edit/<?php echo $row->id ?>'>Edit</a>
+                                                        <a href='<?php echo site_url()?>/guidance/subbab/hapus/<?php echo $row->id ?>'>Hapus</a></td>
+                                                    <?php endif; ?>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>  
                                 </div>

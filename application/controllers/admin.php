@@ -337,6 +337,7 @@ class Admin extends CI_Controller {
     }
     
     function halaman_tambahpembimbing(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $data['title']="Tambah Pembimbing - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -347,6 +348,7 @@ class Admin extends CI_Controller {
     }
     
     function tambahpembimbing(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         //load model
         $this->load->model('model_admin');   
         
@@ -486,6 +488,7 @@ class Admin extends CI_Controller {
     }
     
     function halaman_lihatpembimbing(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $data['title']="Daftar Pembimbing - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -499,6 +502,7 @@ class Admin extends CI_Controller {
     }
     
     function halaman_editpembimbing($idPembimbing){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $data['title']="Edit Pembimbing - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -513,6 +517,7 @@ class Admin extends CI_Controller {
     }
     
     function editpembimbing(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $this->load->model('model_admin');
         
 	$this->form_validation->set_rules('password', 'Password', 'required|matches[confpass]');
@@ -616,6 +621,7 @@ class Admin extends CI_Controller {
     
     
     function halaman_tambahadmin(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $data['title']="Tambah Administrator - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -626,6 +632,7 @@ class Admin extends CI_Controller {
     }
     
     function tambahadmin(){
+        if(!($this->session->userdata('role')==1)) redirect ('guidance/login','location');
         $this->load->library('form_validation');
         $this->load->helper('form');
         

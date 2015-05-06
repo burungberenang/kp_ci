@@ -17,22 +17,22 @@
                                                 <tr>
                                                     <th>Bab</th>
                                                     <th>Materi</th>
-                                                    <th>Action</th>       
+                                                    <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
+                                                        <th>Action</th>
+                                                    <?php endif; ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
-                                                    <?php
-                                                        if ($bab){
-                                                            foreach($bab->result() as $row){
-                                                                echo " <tr><td>".$row->namaBab."</td>"
-                                                                        . " <td>".$row->namaPelajaran."-".$row->namaKelas."</td>"
-                                                                        . " <td><a href='".site_url()."/guidance/bab/edit/".$row->id."'>Edit</a>"
-                                                                        . " <a href='".site_url()."/guidance/bab/hapus/".$row->id."'>Hapus</a></td></tr>";
-                                                            }
-                                                        }
-                                                    ?>
-
+                                                <?php foreach($bab->result() as $row):?>
+                                                <tr>
+                                                    <td><?php echo $row->namaBab ?></td>
+                                                    <td><?php echo $row->namaPelajaran."-".$row->namaKelas ?></td>
+                                                    <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
+                                                        <td><a href='<?php echo site_url()?>/guidance/bab/edit/<?php echo $row->id ?>'>Edit</a>
+                                                        <a href='<?php echo site_url()?>/guidance/bab/hapus/<?php echo $row->id ?>'>Hapus</a></td>
+                                                    <?php endif; ?>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>  
                                 </div>

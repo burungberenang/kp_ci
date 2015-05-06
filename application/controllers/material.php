@@ -123,7 +123,8 @@ class Material extends CI_Controller {
         }
     }
     
-    function edit_subbab(){
+    function edit_subbab($idSubbab, $nama, $link, $deskripsi, $idBab){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -177,6 +178,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_editbab($idBab){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Edit Bab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -192,6 +194,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_editsubbab($idSubbab){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Edit Subbab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -207,6 +210,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_editaksesmateri($idKaryawan, $idMateri){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title'] = "Edit Hak Akses Materi - A+ Learning Guidance";
         
         $this->load->library('form_validation');
@@ -227,12 +231,17 @@ class Material extends CI_Controller {
     }
     
     function halaman_lihatbab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2||$this->session->userdata('role')==3)) redirect ('guidance/login','location');
         $data['title']="Daftar Bab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
         
         $this->load->model('model_material');
-        $data['bab'] = $this->model_material->get_all_bab_detail();
+        if($this->session->userdata('role')==3){
+            $data['bab'] = $this->model_material->get_bab_pembimbing($this->session->userdata('username'));
+        }else{
+            $data['bab'] = $this->model_material->get_all_bab_detail();
+        }
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_lihat_bab');
@@ -240,12 +249,17 @@ class Material extends CI_Controller {
     }
     
     function halaman_lihatsubbab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2||$this->session->userdata('role')==3)) redirect ('guidance/login','location');
         $data['title']="Daftar Sub-Bab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
         
         $this->load->model('model_material');
-        $data['subbab'] = $this->model_material->get_all_subbab_detail();
+        if($this->session->userdata('role')==3){
+            $data['subbab'] = $this->model_material->get_subbab_pembimbing($this->session->userdata('username'));
+        }else{
+            $data['subbab'] = $this->model_material->get_all_subbab_detail();
+        }
         
         $this->load->view('back/b_header',$data);
         $this->load->view('back/b_lihat_subbab');
@@ -253,6 +267,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_lihataksesmateri(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Daftar Akses Materi - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -266,6 +281,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_tambahbab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Tambah Bab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -279,6 +295,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_tambahsubbab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Tambah Sub-Bab - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -292,6 +309,7 @@ class Material extends CI_Controller {
     }
     
     function halaman_tambahaksesmateri(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $data['title']="Tambah Hak Akses Materi - A+ Learning Guidance";
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -307,6 +325,7 @@ class Material extends CI_Controller {
     }
     
     function hapus_aksesmateri($idKaryawan, $idMateri){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $status = $this->model_material->hapus_aksesmateri($idKaryawan,$idMateri);
@@ -331,6 +350,7 @@ class Material extends CI_Controller {
     }
     
     function hapus_bab($id){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $status = $this->model_material->hapus_bab($id);
@@ -355,6 +375,7 @@ class Material extends CI_Controller {
     }
     
     function hapus_subbab($id){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $status = $this->model_material->hapus_subbab($id);
@@ -379,6 +400,7 @@ class Material extends CI_Controller {
     }
     
     function tambahBab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -427,6 +449,7 @@ class Material extends CI_Controller {
     }
     
     function tambahSubbab(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -479,6 +502,7 @@ class Material extends CI_Controller {
     }
     
     function tambahAksesMateri(){
+        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('idKaryawan', 'ID Karyawan', 'required');
@@ -565,7 +589,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/pelajaran/tambah','refresh');
+                    redirect('guidance/pelajaran/tambah','location');
                 }
             }
             $data['title']='Tambah Pelajaran A+ Learning';
@@ -575,7 +599,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_tambah_pelajaran');
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
@@ -585,7 +609,7 @@ class Material extends CI_Controller {
         {
             if($this->input->post('hapus')){
                 $this->model_material->hapus_pelajaran($this->input->post('id'));
-                redirect('guidance/pelajaran/semua', 'refresh');
+                redirect('guidance/pelajaran/semua', 'location');
             }
             $data['title']='Lihat Pelajaran A+ Learning';
             $data['title2']='Lihat Pelajaran';
@@ -596,7 +620,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_lihat_pelajaran',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
@@ -638,7 +662,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/pelajaran/edit/'.$id,'refresh');
+                    redirect('guidance/pelajaran/edit/'.$id,'location');
                 }
             }
             $data['title']='Edit Pelajaran A+ Learning';
@@ -652,7 +676,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_edit_pelajaran',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
     }
         
@@ -698,7 +722,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/kelas/tambah','refresh');
+                    redirect('guidance/kelas/tambah','location');
                 }
             }
             $data['title']='Tambah Kelas A+ Learning';
@@ -708,7 +732,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_tambah_kelas');
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
@@ -718,7 +742,7 @@ class Material extends CI_Controller {
         {
             if($this->input->post('hapus')){
                 $this->model_material->hapus_kelas($this->input->post('id'));
-                redirect('guidance/kelas/semua', 'refresh');
+                redirect('guidance/kelas/semua', 'location');
             }
             $data['title']='Lihat Kelas A+ Learning';
             $data['title2']='Lihat Kelas';
@@ -729,7 +753,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_lihat_kelas',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
@@ -771,7 +795,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/kelas/edit/'.$id,'refresh');
+                    redirect('guidance/kelas/edit/'.$id,'location');
                 }
             }
             $data['title']='Edit Kelas A+ Learning';
@@ -785,7 +809,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_edit_kelas',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
 
     }
@@ -834,7 +858,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/materi/tambah','refresh');
+                    redirect('guidance/materi/tambah','location');
                 }
             }
             $data['title']='Tambah Materi A+ Learning';
@@ -848,17 +872,17 @@ class Material extends CI_Controller {
             $this->load->view('back/b_tambah_materi',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
     
     function lihatMateri(){
-        if($this->session->userdata('role')==1)
+        if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('hapus')){
                 $this->model_material->hapus_materi($this->input->post('id'));
-                redirect('guidance/materi/semua', 'refresh');
+                redirect('guidance/materi/semua', 'location');
             }
             $data['title']='Lihat Materi A+ Learning';
             $data['title2']='Lihat Materi';
@@ -869,7 +893,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_lihat_materi',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
         
     }
@@ -910,7 +934,7 @@ class Material extends CI_Controller {
                             . "</div>";
                         $this->session->set_flashdata('warning',$warning);
                     }
-                    redirect('guidance/materi/edit/'.$id,'refresh');
+                    redirect('guidance/materi/edit/'.$id,'location');
                 }
             }
             $data['title']='Edit Materi A+ Learning';
@@ -924,7 +948,7 @@ class Material extends CI_Controller {
             $this->load->view('back/b_edit_materi',$data);
             $this->load->view('back/b_footer');
         } else {
-            redirect('guidance/login', 'refresh');
+            redirect('guidance/login', 'location');
         }
     }
 }

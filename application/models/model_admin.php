@@ -98,26 +98,30 @@ class Model_admin extends CI_Model {
         return $query;
     }
     
-    function get_karyawan_byUsername($username){
+    function get_detail_karyawan($id){
+        $sql = "SELECT * "
+                . " FROM karyawan"
+                . " WHERE id = ".$id;
+                
+        $this->load->database('default');
+        $query = $this->db->query($sql);
         
-    }
-    
-    function get_karyawan_byID($userID){
+        return $query->row();
         
     }
     
     // return connection_error if transaction failed
     // return success if it's success
-    function edit_data_karyawan($username,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto){
+    function edit_data_karyawan($id,$noKTP,$nama,$alamat,$password,$tglLahir,$jabatan,$foto){
         
         $sql = " UPDATE karyawan "
-                . " SET noKTP=?,nama=?,alamat=?,tglLahir=?,jabatan=?,foto=? "
-                . " WHERE username = ".$username;
+                . " SET password=?, noKTP=?,nama=?,alamat=?,tglLahir=?,jabatan=?,foto=? "
+                . " WHERE id = ".$id;
         
         $this->load->database('default');
         
         $this->db->trans_start();
-        $this->db->query($sql,array($username,$password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto));
+        $this->db->query($sql,array($password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$foto,$id));
         $this->db->trans_complete();
             
         if ($this->db->trans_status() === FALSE)

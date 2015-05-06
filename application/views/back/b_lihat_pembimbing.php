@@ -35,7 +35,7 @@
                                                                 echo " <tr><td><img src='".base_url()."foto/".$row->foto."'></td>"
                                                                         . " <td>".$row->nama."</td>"
                                                                         . " <td>".$row->jabatan."</td>"
-                                                                        . " <td><a href='".site_url()."/guidance/pembimbing/edit/".$row->id."'>Edit</a></td></tr>";
+                                                                        . " <td><a class='btn btn-primary' href='".site_url()."/guidance/pembimbing/edit/".$row->id."'>Edit</a></td></tr>";
                                                             }
                                                         }
                                                     ?>

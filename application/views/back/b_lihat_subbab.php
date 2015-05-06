@@ -56,8 +56,8 @@
                                                     </td>
                                                     <td><?php echo $row->deskripsi?></td>
                                                     <?php  if ($this->session->userdata('role')==1||$this->session->userdata('role')==2): ?>
-                                                        <td><a href='<?php echo site_url()?>/guidance/subbab/edit/<?php echo $row->id ?>'>Edit</a>
-                                                        <a href='<?php echo site_url()?>/guidance/subbab/hapus/<?php echo $row->id ?>'>Hapus</a></td>
+                                                        <td><a class='btn btn-primary' href='<?php echo site_url()?>/guidance/subbab/edit/<?php echo $row->id ?>'>Edit</a>
+                                                        <a class='btn btn-danger' href='<?php echo site_url()?>/guidance/subbab/hapus/<?php echo $row->id ?>'>Hapus</a></td>
                                                     <?php endif; ?>
                                                 </tr>
                                                 <?php endforeach; ?>

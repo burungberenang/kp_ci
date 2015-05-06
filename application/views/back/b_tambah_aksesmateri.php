@@ -50,7 +50,7 @@
                                     </div>
                                     
                                     <div class="form-actions">
-					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="#">Kembali</a>
+					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="<?php echo site_url().'/guidance/aksesmateri/semua'; ?>">Kembali</a>
                                     </div>
                                     
                                 </form>

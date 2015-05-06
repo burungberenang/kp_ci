@@ -16,19 +16,19 @@
                                 
                             <div class="widget-content">
                                 <?php $attributes = array('class' => 'form-horizontal'); 
-                                    echo form_open("guidance/subbab/checktambah",$attributes); ?>
+                                    echo form_open_multipart("guidance/subbab/checktambah",$attributes); ?>
                                 
                                     <div class="form-group">
 					<label class="control-label">Nama</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Nama Bab" name="nama" required/>
+                                            <input type="text" class="form-control input-small" placeholder="Nama Sub-Bab" name="nama" required/>
 					</div>
                                     </div>
                                 
                                     <div class="form-group">
 					<label class="control-label">Link</label>
 					<div class="controls">
-                                            <input type="text" class="form-control input-small" placeholder="Link" name="link" required/>
+                                            <input type="file" class="form-control input-small" placeholder="Link" name="link" required/>
 					</div>
                                     </div>
                                 
@@ -55,7 +55,7 @@
                                     </div>
                                     
                                     <div class="form-actions">
-					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="#">Kembali</a>
+					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="<?php echo site_url().'/guidance/subbab/semua'; ?>">Kembali</a>
                                     </div>
                                     
                                 </form>

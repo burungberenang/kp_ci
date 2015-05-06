@@ -29,7 +29,7 @@
         </div>-->
         <div id="user-nav">
             <ul class="btn-group">
-                <li class="btn" ><a title="" href="#"><i class="glyphicon glyphicon-user"></i> <span class="text">Profile</span></a></li>
+                <li class="btn" ><a title="" href="<?php echo site_url(); ?>/guidance/profile"><i class="glyphicon glyphicon-user"></i> <span class="text">Profile</span></a></li>
 <!--                <li class="btn dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="glyphicon glyphicon-envelope"></i> <span class="text">Messages</span> <span class="label label-danger">5</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a class="sAdd" title="" href="#">new message</a></li>

@@ -531,6 +531,10 @@ class Material extends CI_Controller {
     function lihatPelajaran(){
         if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_pelajaran($this->input->post('id'));
+                redirect('guidance/pelajaran/semua', 'refresh');
+            }
             $data['title']='Lihat Pelajaran A+ Learning';
             $data['title2']='Lihat Pelajaran';
             
@@ -660,6 +664,10 @@ class Material extends CI_Controller {
     function lihatKelas(){
         if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_kelas($this->input->post('id'));
+                redirect('guidance/kelas/semua', 'refresh');
+            }
             $data['title']='Lihat Kelas A+ Learning';
             $data['title2']='Lihat Kelas';
             
@@ -796,6 +804,10 @@ class Material extends CI_Controller {
     function lihatMateri(){
         if($this->session->userdata('role')==1)
         {
+            if($this->input->post('hapus')){
+                $this->model_material->hapus_materi($this->input->post('id'));
+                redirect('guidance/materi/semua', 'refresh');
+            }
             $data['title']='Lihat Materi A+ Learning';
             $data['title2']='Lihat Materi';
             
@@ -814,27 +826,40 @@ class Material extends CI_Controller {
         if($this->session->userdata('role')==1||$this->session->userdata('role')==2)
         {
             if($this->input->post('simpan')){
-                
-                $hasil=$this->model_material->update_materi($this->input->post('id'), $this->input->post('pelajaran'), $this->input->post('kelas'));
-                if($hasil=="connection_error")
-                {
-                    //munculkan error kalau transaksi sql gagal
+                if($this->model_material->cek_materi($this->input->post('pelajaran'),$this->input->post('kelas'))==FALSE){
+                    //munculkan error kalau sudah ada
                     $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
-                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
-                        . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
-                        . "</div>";
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Maaf, data sudah ada sebelumnya</strong> "
+                            . "</div>";
                     $this->session->set_flashdata('warning',$warning);
-                }else if($hasil=="success"){
-                    //munculkan pemberitahuan jika data telah berhasil ditambahkan
-                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
-                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
-                        . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Akun berhasil didaftarkan</strong> "
-                        . "</div>";
-                    $this->session->set_flashdata('warning',$warning);
+                    
+                    //tampung pada flash data buat nampilin isi yang sebelumnya 
+                    $this->session->set_flashdata('isiform',array('idKelas'=>$this->input->post('kelas'),'idPelajaran'=>$this->input->post('pelajaran'),'id'=>$this->input->post('id')));
+                    redirect('guidance/materi/edit/'.$id,'location');
+                }else{
+                    $hasil=$this->model_material->update_materi($this->input->post('id'), $this->input->post('pelajaran'), $this->input->post('kelas'));
+                    if($hasil=="connection_error")
+                    {
+                        //munculkan error kalau transaksi sql gagal
+                        $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
+                            . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                    }else if($hasil=="success"){
+                        //munculkan pemberitahuan jika data telah berhasil ditambahkan
+                        $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Akun berhasil didaftarkan</strong> "
+                            . "</div>";
+                        $this->session->set_flashdata('warning',$warning);
+                    }
+                    redirect('guidance/materi/edit/'.$id,'refresh');
                 }
-                redirect('guidance/materi/edit/'.$id,'refresh');
             }
             $data['title']='Edit Materi A+ Learning';
             $data['title2']='Edit Materi';

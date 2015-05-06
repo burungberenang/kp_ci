@@ -432,4 +432,69 @@ class Model_material extends CI_Model {
             return "success";
         }
     }
+    
+    function hapus_materi($id){
+        $this->db->trans_start();
+        $this->db->query("DELETE FROM historybayar WHERE idPaket IN (SELECT p.id FROM paket p INNER JOIN materi m ON p.idMateri=m.id WHERE m.id=".$id.")");
+        $this->db->query("DELETE FROM subbab WHERE idBab IN (SELECT b.id FROM bab b INNER JOIN materi m ON b.idMateri=m.id WHERE m.id=".$id.")");
+        $this->db->query("DELETE FROM paket WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM bab WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM aksesmateri WHERE idMateri=".$id);
+        $this->db->query("DELETE FROM materi WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
+    
+    function hapus_kelas($id){
+        $this->db->trans_start();
+        $this->db->query("DELETE FROM historybayar WHERE idPaket IN (SELECT p.id FROM paket p INNER JOIN materi m ON p.idMateri=m.id INNER JOIN kelas k ON k.id=m.idKelas WHERE k.id=".$id.")");
+        $this->db->query("DELETE FROM subbab WHERE idBab IN (SELECT b.id FROM bab b INNER JOIN materi m ON b.idMateri=m.id INNER JOIN kelas k ON k.id=m.idKelas WHERE k.id=".$id.")");
+        $this->db->query("DELETE FROM paket WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN kelas k ON k.id=m.idKelas WHERE k.id=".$id.")");
+        $this->db->query("DELETE FROM bab WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN kelas k ON k.id=m.idKelas WHERE k.id=".$id.")");
+        $this->db->query("DELETE FROM aksesmateri WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN kelas k ON k.id=m.idKelas WHERE k.id=".$id.")");
+        $this->db->query("DELETE FROM materi WHERE idKelas=".$id);
+        $this->db->query("DELETE FROM kelas WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
+    
+    function hapus_pelajaran($id){
+        $this->db->trans_start();
+        $this->db->query("DELETE FROM historybayar WHERE idPaket IN (SELECT p.id FROM paket p INNER JOIN materi m ON p.idMateri=m.id INNER JOIN pelajaran pl ON pl.id=m.idPelajaran WHERE pl.id=".$id.")");
+        $this->db->query("DELETE FROM subbab WHERE idBab IN (SELECT b.id FROM bab b INNER JOIN materi m ON b.idMateri=m.id INNER JOIN pelajaran p ON p.id=m.idPelajaran WHERE p.id=".$id.")");
+        $this->db->query("DELETE FROM paket WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN pelajaran p ON p.id=m.idPelajaran WHERE p.id=".$id.")");
+        $this->db->query("DELETE FROM bab WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN pelajaran p ON p.id=m.idPelajaran WHERE p.id=".$id.")");
+        $this->db->query("DELETE FROM aksesmateri WHERE idMateri IN (SELECT m.id FROM materi m INNER JOIN pelajaran p ON p.id=m.idPelajaran WHERE p.id=".$id.")");
+        $this->db->query("DELETE FROM materi WHERE idPelajaran=".$id);
+        $this->db->query("DELETE FROM pelajaran WHERE id=".$id);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 }

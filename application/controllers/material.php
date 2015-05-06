@@ -21,8 +21,59 @@ class Material extends CI_Controller {
         $this->load->model('model_material');
     }
     
-    function edit_bab($idBab, $namaBab, $idMateri){
-        if(!($this->session->userdata('role')==1||$this->session->userdata('role')==2)) redirect ('guidance/login','location');
+    function edit_aksesmateri(){
+        $this->load->model('model_material');
+        
+        $this->form_validation->set_rules('idMateriLama', 'ID Materi Lama', 'required');
+	$this->form_validation->set_rules('idMateriBaru', 'ID Materi Baru', 'required');
+        $this->form_validation->set_rules('idKaryawanLama','ID Karyawan Lama','required');
+        $this->form_validation->set_rules('idKaryawanBaru','ID Karyawan Baru','required');
+        
+        $this->form_validation->set_message('required','%s harus diisi.');
+        
+        if ($this->form_validation->run() == FALSE)
+	{
+            $this->form_validation->set_error_delimiters("<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>", "</strong> "
+                        . "</div>");
+            $this->session->set_flashdata('warning',validation_errors());
+            redirect('/guidance/bab/semua', 'location');
+	}
+        else
+	{
+            $idMateriLama = $this->input->post('idMateriLama');
+            $idMateriBaru = $this->input->post('idMateriBaru');
+            $idKaryawanLama = $this->input->post('idKaryawanLama');
+            $idKaryawanBaru = $this->input->post('idKaryawanBaru');
+            
+            $status = $this->model_material->edit_aksesmateri($idMateriLama,$idMateriBaru,$idKaryawanLama,$idKaryawanBaru);
+
+            if ($status == "success")
+            {
+                $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Data aksesmateri berhasil diubah.</strong> "
+                        . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/aksesmateri/semua', 'location');
+            }
+            else if ($status == "connection_failed")
+            {
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                        . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/guidance/aksesmateri/semua', 'location');
+            }
+        }
+    }
+    
+    function edit_bab(){
         $this->load->model('model_material');
         
         $this->form_validation->set_rules('nama', 'Nama', 'required');

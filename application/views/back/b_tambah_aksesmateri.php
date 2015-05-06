@@ -21,7 +21,7 @@
                                     <div class="form-group">
 					<label class="control-label">ID Karyawan</label>
 					<div class="controls">
-                                            <select multiple class="forn-control" required>
+                                            <select class="forn-control" name="idKaryawan" required>
                                             
                                             <?php
                                                 if ($karyawan){

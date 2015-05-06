@@ -84,13 +84,13 @@ class Model_material extends CI_Model {
         }
     }
     
-    function edit_aksesmateri($idMateri,$idKaryawan){
-        $sql = "UPDATE aksesmateri SET idMateri=?, idKaryawan=? WHERE id=?";
+    function edit_aksesmateri($idMateriLama, $idMateriBaru, $idKaryawanLama, $idKaryawanBaru){
+        $sql = "UPDATE aksesmateri SET idMateri=?, idKaryawan=? WHERE idMateri=? AND idKaryawan=?";
         
         $this->load->database('default');
         
         $this->db->trans_start();
-        $this->db->query($sql, array($idMateri,$idKaryawan));
+        $this->db->query($sql, array($idMateriBaru,$idKaryawanBaru,$idMateriLama,$idKaryawanLama));
         $this->db->trans_complete();
         
         if ($this->db->trans_status() === FALSE)
@@ -159,7 +159,7 @@ class Model_material extends CI_Model {
     }
     
     function get_detail_materi($id){
-        $sql = "SELECT m.id, p.nama as pelajaran, k.nama as kelas"
+        $sql = "SELECT m.id as id, p.nama as pelajaran, k.nama as kelas"
                 . " FROM materi m"
                 . " INNER JOIN pelajaran p on m.idPelajaran = p.id"
                 . " INNER JOIN kelas k on k.id = m.idKelas"
@@ -168,7 +168,7 @@ class Model_material extends CI_Model {
         $this->load->database('default');
         $query = $this->db->query($sql);
         
-        return $query;
+        return $query->row();
     }
     
     function get_detail_subbab($id){

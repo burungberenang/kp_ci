@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.blue.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/select2.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/backend.main.css" type="text/css"/>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/icheck/flat/blue.css" type="text/css"/>
         
         <style>
             .modal-backdrop {

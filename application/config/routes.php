@@ -83,6 +83,7 @@ $route['guidance/aksesmateri/tambah']='material/halaman_tambahaksesmateri';
 $route['guidance/aksesmateri/checktambah']='material/tambahaksesmateri';
 $route['guidance/aksesmateri/hapus/(:num)/(:num)']='material/hapus_aksesmateri/$1/$2';
 $route['guidance/aksesmateri/semua']='material/halaman_lihataksesmateri';
+$route['guidance/aksesmateri/checkedit']='material/edit_aksesmateri';
 $route['guidance/materi/tambah']='material/tambahMateri';
 $route['guidance/materi/semua']='material/lihatMateri';
 $route['guidance/materi/edit/(:any)']='material/editMateri/$1';

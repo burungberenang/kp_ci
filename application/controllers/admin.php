@@ -146,7 +146,7 @@ class Admin extends CI_Controller {
                     $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                            . "</button><strong>Profil Anda berhasil diubah.</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning', $warning);
                     redirect('/guidance/profile/edit', 'location');
@@ -420,7 +420,7 @@ class Admin extends CI_Controller {
                     $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                             . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                             . "<span class='sr-only'>Close</span>"
-                            . "</button><strong>Data karyawan berhasil dimasukkan.</strong> "
+                            . "</button><strong>Data karyawan berhasil ditambahkan.</strong> "
                             . "</div>";
                     $this->session->set_flashdata('warning', $warning);
                     redirect('/guidance/pembimbing/tambah', 'location');

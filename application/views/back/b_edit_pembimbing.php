@@ -18,12 +18,19 @@
 
                     <div class="widget-content">
 <?php $attributes = array('class' => 'form-horizontal');
-echo form_open("guidance/pembimbing/checkedit", $attributes);
+echo form_open_multipart("guidance/pembimbing/checkedit", $attributes);
 ?>
 
                         <div class="form-group">
                             <div class="controls">
                                 <input type="hidden" name="idPembimbing" value="<?php echo $pembimbing->id; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label">Username</label>
+                            <div class="controls">
+                                <label><?php echo $pembimbing->username?></label>
                             </div>
                         </div>
 

@@ -339,7 +339,6 @@ class Admin extends CI_Controller {
         $config1['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config1);
-        $this->load->model('model_admin');
 
         //set validation rules and message
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -483,7 +482,14 @@ class Admin extends CI_Controller {
 
     function editpembimbing() {
         $this->load->model('model_admin');
+        
+        $config1['upload_path'] = './foto/';
+        $config1['allowed_types'] = 'gif|jpg|png';
+        $config1['remove_spaces'] = TRUE;
+        $config1['encrypt_name'] = TRUE;
 
+        $this->load->library('upload', $config1);
+        
         $this->form_validation->set_rules('password', 'Password', 'required|matches[confpass]');
         $this->form_validation->set_rules('confpass', 'Ulang Password', 'required');
         $this->form_validation->set_rules('noKTP', 'Nomor KTP', 'required|numeric');
@@ -551,7 +557,7 @@ class Admin extends CI_Controller {
                                 . "</button><strong>Data karyawan berhasil diubah.</strong> "
                                 . "</div>";
                         $this->session->set_flashdata('warning', $warning);
-                        redirect('/guidance/pembimbing/semua', 'location');
+                        redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
                     } else if ($status == "connection_error") {
                         $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
                                 . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
@@ -559,7 +565,7 @@ class Admin extends CI_Controller {
                                 . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
                                 . "</div>";
                         $this->session->set_flashdata('warning', $warning);
-                        redirect('/guidance/pembimbing/semua', 'location');
+                        redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
                     } else {
                         $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                                 . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
@@ -567,12 +573,45 @@ class Admin extends CI_Controller {
                                 . "</button><strong>" . $status . "</strong> "
                                 . "</div>";
                         $this->session->set_flashdata('warning', $warning);
-                        redirect('/guidance/pembimbing/tambah', 'location');
+                        redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
                     }
                 }
-            }
-            else {
-                
+            } else {
+                $id = $this->input->post('idPembimbing');
+                $password = $this->input->post('password');
+                $noKTP = $this->input->post('noKTP');
+                $nama = $this->input->post('nama');
+                $alamat = $this->input->post('alamat');
+                $tglLahir = $this->input->post('tglLahir');
+                $jabatan = $this->input->post('jabatan');
+
+                $status = $this->model_admin->edit_data_karyawan_tanpafoto($id, $noKTP, $nama, $alamat, $password, $tglLahir, $jabatan);
+
+                if ($status == "success") {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Data karyawan berhasil diubah.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning', $warning);
+                    redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
+                } else if ($status == "connection_error") {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning', $warning);
+                    redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
+                } else {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>" . $status . "</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning', $warning);
+                    redirect('/guidance/pembimbing/edit/' . $this->input->post('idPembimbing'), 'location');
+                }
             }
         }
     }

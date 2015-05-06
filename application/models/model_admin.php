@@ -136,8 +136,28 @@ class Model_admin extends CI_Model {
         }
     }
     
-    function edit_password_karyawan($username,$oldpassword,$newpassword){
+    function edit_data_karyawan_tanpafoto($id,$noKTP,$nama,$alamat,$password,$tglLahir,$jabatan){
         
+        $sql = " UPDATE karyawan "
+                . " SET password=?, noKTP=?,nama=?,alamat=?,tglLahir=?,jabatan=? "
+                . " WHERE id = ".$id;
+        
+        $this->load->database('default');
+        
+        $this->db->trans_start();
+        $this->db->query($sql,array($password,$noKTP,$nama,$alamat,$tglLahir,$jabatan,$id));
+        $this->db->trans_complete();
+            
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
     }
     
     function get_profile($user){

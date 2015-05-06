@@ -1,11 +1,11 @@
             <div id="content">
             <div id="content-header">
-                <h1>Tambah Hak Akses Materi</h1>
+                <h1>Edit Hak Akses Materi</h1>
             </div>
             <div id="breadcrumb">
                 <a href="#" title="Go to Home" class="tip-bottom"><i class="glyphicon glyphicon-home"></i> Home</a>
                 <a href="#" class="tip-bottom">Hak Akses Materi</a>
-                <a href="#" class="current">Tambah Hak Akses Materi</a>
+                <a href="#" class="current">Edit Hak Akses Materi</a>
             </div>
             <div class="container-fluid">
                 <div class="row">
@@ -21,29 +21,21 @@
                                     <div class="form-group">
 					<label class="control-label">Karyawan Lama</label>
 					<div class="controls">
-                                            <input type="text" class="form-controlreadonly input-small" placeholder="Nama Bab" name="nama" value="<?php echo $karyawanlama->id.'-'.$karyawanlama->nama; ?>" required/>
+                                            <input type="text" readonly name="idKaryawanLama" class="form-controlreadonly input-small" value="<?php echo $karyawanlama->id.'-'.$karyawanlama->nama; ?>" required/>
 					</div>
                                     </div>
                                 
                                     <div class="form-group">
                                         <label class="control-label">Materi Lama</label>
                                         <div class="controls">
-                                            <textarea class="form-control" readonly>
-                                                <?php
-                                                    if ($materilama){
-                                                    foreach($materilama->result() as $row){
-                                                        echo $row->id."-".$row->pelajaran." ".$row->kelas."&#13;&#10;";
-                                                    }
-                                                }
-                                                ?>
-                                            </textarea>
+                                            <input type="text" readonly name="idMateriLama" class="form-controlreadonly input-small" value="<?php echo $materilama->id.'-'.$materilama->pelajaran.' '.$materilama->kelas; ?>" required/>
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
 					<label class="control-label">Karyawan Baru</label>
 					<div class="controls">
-                                            <select name="idKaryawan" required>
+                                            <select name="idKaryawanBaru" required>
                                             
                                             <?php
                                                 if ($karyawan){
@@ -59,7 +51,7 @@
                                     <div class="form-group">
 					<label class="control-label">Materi Baru</label>
 					<div class="controls">
-                                            <select multiple class="forn-control" required>
+                                            <select class="forn-control" name="idMateriBaru" required>
                                             <?php
                                                 if ($materi){
                                                     foreach($materi->result() as $row){
@@ -72,7 +64,7 @@
                                     </div>
                                     
                                     <div class="form-actions">
-					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="#">Kembali</a>
+					<input type="submit" class="btn btn-primary btn-small" value="Simpan"> atau <a class="text-danger" href="<?php echo site_url()."/guidance/aksesmateri/semua" ?>">Kembali</a>
                                     </div>
                                     
                                 </form>

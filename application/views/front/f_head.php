@@ -49,7 +49,7 @@
                         
                     <?php else : ?>
                         
-                        <li><a href=""><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                        <li><a href="<?php echo site_url(); ?>/materi/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         <li><a href="<?php echo base_url(); ?>">Materiku</a></li>
                         <li><a href="<?php echo site_url(); ?>/materi/beli">Beli Materi</a></li>
                         <li><a href="<?php echo site_url()."/logout" ?>">Keluar</a></li>

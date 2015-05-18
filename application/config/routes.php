@@ -38,7 +38,6 @@
 |
 */
 
-/* frontend */
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['info']='home/info';

@@ -58,7 +58,7 @@ class Purchasing extends CI_Controller {
                     $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
+                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan menginput paket ulang</strong> "
                         . "</div>";
                     $this->session->set_flashdata('warning',$warning);
                 }else if($hasil=="success"){
@@ -66,7 +66,7 @@ class Purchasing extends CI_Controller {
                     $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Akun berhasil didaftarkan</strong> "
+                        . "</button><strong>Paket berhasil didaftarkan</strong> "
                         . "</div>";
                     $this->session->set_flashdata('warning',$warning);
                 }
@@ -129,7 +129,7 @@ class Purchasing extends CI_Controller {
                     $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan mendaftar ulang</strong> "
+                        . "</button><strong>Maaf, ada kesalahan koneksi. Silahkan menginput paket ulang</strong> "
                         . "</div>";
                     $this->session->set_flashdata('warning',$warning);
                 }else if($hasil=="success"){
@@ -137,7 +137,7 @@ class Purchasing extends CI_Controller {
                     $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
                         . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
                         . "<span class='sr-only'>Close</span>"
-                        . "</button><strong>Akun berhasil didaftarkan</strong> "
+                        . "</button><strong>Paket berhasil didaftarkan</strong> "
                         . "</div>";
                     $this->session->set_flashdata('warning',$warning);
                 }

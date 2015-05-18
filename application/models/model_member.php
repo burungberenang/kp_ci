@@ -102,4 +102,113 @@ class Model_member extends CI_Model {
         }
     }
     //------------------------------------------------------------------------
+    
+    // Hak akses materi //
+    function ambilmateriuser($username){
+        $sql = "SELECT pl.nama as namaPelajaran, k.nama as namaKelas, mt.id as idMateri FROM historybayar hb "
+                . " INNER JOIN member m ON hb.idMember = m.id "
+                . " INNER JOIN paket p ON p.id = hb.idPaket "
+                . " INNER JOIN materi mt ON p.idMateri = mt.id "
+                . " INNER JOIN pelajaran pl ON pl.id = mt.idPelajaran "
+                . " INNER JOIN kelas k ON k.id = mt.idKelas "
+                . " WHERE m.username ='".$username."' AND hb.tanggalNonAktif > NOW()";
+                
+        $this->load->database('default');
+        $query = $this->db->query($sql);
+        
+        return $query;
+    }
+    
+    function ambildetailuser($username){
+        $sql = "SELECT * FROM member "
+                . " WHERE username=? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($username));
+        
+        if ($row->num_rows()==1)
+        {
+            return $row->row();
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    function ambildetailmateri($idMateri){
+        $sql = "SELECT m.id as idMateri, p.nama as namaPelajaran, k.nama as namaKelas "
+                . " FROM materi m "
+                . " INNER JOIN pelajaran p ON m.idPelajaran = p.id "
+                . " INNER JOIN kelas k ON k.id = m.idKelas "
+                . " WHERE m.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idMateri));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row->row();
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    function ambildetailbab($idBab){
+        $sql = "SELECT b.id as idBab, b.nama as namaBab "
+                . " FROM bab b "
+                . " WHERE b.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idBab));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row->row();
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    function ambilsemuabab($idMateri){
+        $sql = " SELECT m.id as idMateri, b.nama as namaBab, b.id as idBab "
+                . " FROM materi m "
+                . " INNER JOIN bab b ON m.idPelajaran = b.id "
+                . " WHERE m.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idMateri));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    function ambilsemuasubbab($idBab){
+        $sql = " SELECT sb.id as id, sb.nama as namaSubbab, sb.deskripsi as deskripsi, sb.link as link "
+                . " FROM subbab sb "
+                . " INNER JOIN bab b ON b.id = sb.idBab "
+                . " WHERE b.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idBab));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

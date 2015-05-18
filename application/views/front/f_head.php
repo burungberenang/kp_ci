@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/bootstrap.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/carousel.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/frontend.css" type="text/css"/>
-
+        <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/shop-homepage.css" type="text/css"/>
+            
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -48,8 +49,9 @@
                         
                     <?php else : ?>
                         
+                        <li><a href="<?php echo site_url(); ?>/materi/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         <li><a href="<?php echo base_url(); ?>">Materiku</a></li>
-                        <li><a href="<?php echo base_url(); ?>">Beli Materi</a></li>
+                        <li><a href="<?php echo site_url(); ?>/materi/beli">Beli Materi</a></li>
                         <li><a href="<?php echo site_url()."/logout" ?>">Keluar</a></li>
                         
                     <?php endif; ?>

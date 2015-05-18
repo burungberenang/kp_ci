@@ -44,13 +44,13 @@
                     <ul class="nav navbar-nav navbar-right">
                     <?php if ($this->session->userdata('role') != '4'):  // session member?>
                     
-                        <li><a href="<?php echo base_url(); ?>index.php/daftar">Daftar</a></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/masuk">Masuk</a></li>
+                        <li><a href="<?php echo site_url(); ?>/daftar">Daftar</a></li>
+                        <li><a href="<?php echo site_url(); ?>/masuk">Masuk</a></li>
                         
                     <?php else : ?>
                         
                         <li><a href="<?php echo site_url(); ?>/materi/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                        <li><a href="<?php echo base_url(); ?>">Materiku</a></li>
+                        <li><a href="<?php echo site_url(); ?>/materiku">Materiku</a></li>
                         <li><a href="<?php echo site_url(); ?>/materi/beli">Beli Materi</a></li>
                         <li><a href="<?php echo site_url()."/logout" ?>">Keluar</a></li>
                         

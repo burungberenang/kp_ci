@@ -12,6 +12,42 @@ class Member extends CI_Controller {
         
     }
     
+    function halaman_materiku(){
+        $data['title']="Materiku - A+ Learning Guidance";
+        $this->load->model('model_member');
+        
+        $data['dataku'] = $this->model_member->ambildetailuser($this->session->userdata('username'));
+        $data['datamateri'] = $this->model_member->ambilmateriuser($this->session->userdata('username'));
+        
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_materiku');
+        $this->load->view('front/f_foot');
+    }
+    
+    function lihatMateri($idMateri){
+        $data['title']="Materiku - A+ Learning Guidance";
+        $this->load->model('model_member');
+        
+        $data['datamateri'] = $this->model_member->ambildetailmateri($idMateri);
+        $data['databab'] = $this->model_member->ambilsemuabab($idMateri);
+        
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_detail_materiku');
+        $this->load->view('front/f_foot');
+    }
+    
+    function lihatBab($idBab){
+        $data['title']="Materiku - A+ Learning Guidance";
+        $this->load->model('model_member');
+        
+        $data['databab'] = $this->model_member->ambildetailbab($idBab);
+        $data['datasubbab'] = $this->model_member->ambilsemuasubbab($idBab);
+        
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_detail_bab');
+        $this->load->view('front/f_foot');
+    }
+            
     function login(){
         $this->load->model('model_member');
         

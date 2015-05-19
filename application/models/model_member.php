@@ -174,6 +174,44 @@ class Model_member extends CI_Model {
         }
     }
     
+    function ambildetailkelas($idKelas){
+        $sql = "SELECT k.id as idKelas, k.nama as namaKelas "
+                . " FROM kelas k "
+                . " WHERE k.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idKelas));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row->row();
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    function ambilsemuapelajaran($idKelas){
+        $sql = " SELECT m.id as idMateri, k.nama as namaKelas, p.nama as namaPelajaran "
+                . " FROM kelas k "
+                . " INNER JOIN materi m ON m.idKelas = k.id "
+                . " INNER JOIN pelajaran p ON p.id = m.idPelajaran"
+                . " WHERE k.id = ? ";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idKelas));
+        
+        if ($row->num_rows() > 0)
+        {
+            return $row;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     function ambilsemuabab($idMateri){
         $sql = " SELECT m.id as idMateri, b.nama as namaBab, b.id as idBab "
                 . " FROM materi m "
@@ -194,7 +232,7 @@ class Model_member extends CI_Model {
     }
     
     function ambilsemuasubbab($idBab){
-        $sql = " SELECT sb.id as id, sb.nama as namaSubbab, sb.deskripsi as deskripsi, sb.link as link "
+        $sql = " SELECT sb.id as idSubbab, sb.nama as namaSubbab, sb.deskripsi as deskripsi, sb.link as link "
                 . " FROM subbab sb "
                 . " INNER JOIN bab b ON b.id = sb.idBab "
                 . " WHERE b.id = ? ";

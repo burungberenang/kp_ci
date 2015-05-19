@@ -30,13 +30,13 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Materi<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/1">SMP Kelas VII</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/2">SMP Kelas VIII</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/3">SMP Kelas IX</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/1">SMP Kelas VII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/2">SMP Kelas VIII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/3">SMP Kelas IX</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/4">SMA Kelas X</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/5">SMA Kelas XI</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/front/materi/6">SMA Kelas XII</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/4">SMA Kelas X</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/5">SMA Kelas XI</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/materi/6">SMA Kelas XII</a></li>
                             </ul>
                         </li>
                     </ul>

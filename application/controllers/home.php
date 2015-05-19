@@ -6,6 +6,7 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('session');
+        
     }
     
     
@@ -41,18 +42,6 @@ class Home extends CI_Controller {
         $this->load->view('front/f_head',$data);
         $this->load->view('front/f_register_user');
         $this->load->view('front/f_foot');
-    }
-    
-    function logincheck(){
-        $this->load->model('model_member');
-        if ($this->model_member->checkmember())
-        {
-            
-        }
-        else
-        {
-            
-        }
     }
     
     function logout(){   

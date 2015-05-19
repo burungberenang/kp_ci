@@ -47,7 +47,9 @@ $route['masuk']='home/masuk';
 $route['logout']='home/logout';
 $route['materiku']='member/halaman_materiku';
 $route['materiku/lihat/(:num)'] = 'member/lihatMateri/$1';
+$route['materi/lihat/(:num)'] = 'member/materi/$1';
 $route['materiku/bab/(:num)'] = 'member/lihatBab/$1';
+$route['materi/(:num)'] = 'member/kelas/$1';
 /* -------------*/
 
 $route['guidance/login']='admin/halaman_login';

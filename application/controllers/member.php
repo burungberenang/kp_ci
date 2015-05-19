@@ -12,6 +12,48 @@ class Member extends CI_Controller {
         
     }
     
+    function materi($idBab){
+        $data['title'] = "Materi - A+ Learning Guidance";
+        $this->load->model('model_member');
+        
+        $data['databab'] = $this->model_member->ambildetailbab($idBab);
+        $data['datasubbab'] = $this->model_member->ambilsemuasubbab($idBab);
+        
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_detail_bab_new');
+        $this->load->view('front/f_foot');
+    }
+    
+    function kelas($idKelas){
+        $data['title'] = "Materi - A+ Learning Guidance";
+        $this->load->model('model_member');
+        
+        //foreach tiap data
+        $datamateriku = $this->model_member->ambilsemuapelajaran($idKelas);
+        $databab = array();
+        $datasubbab = array();
+        
+        if ($datamateriku){
+            foreach ($datamateriku->result() as $row1){
+                $databab[$row1->idMateri] = $this->model_member->ambilsemuabab($row1->idMateri);
+                if ($databab[$row1->idMateri]) {
+                    foreach($databab[$row1->idMateri]->result() as $row2){
+                        $datasubbab[$row1->idMateri][$row2->idBab] = $this->model_member->ambilsemuasubbab($row2->idBab);
+                    }
+                }
+            }
+        }
+        
+        $data['datakelas'] = $this->model_member->ambildetailkelas($idKelas);
+        $data['datamateri'] = $datamateriku;
+        $data['databab'] = $databab;
+        $data['datasubbab'] = $datasubbab;
+        
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_kelas');
+        $this->load->view('front/f_foot');
+    }
+    
     function halaman_materiku(){
         $data['title']="Materiku - A+ Learning Guidance";
         $this->load->model('model_member');

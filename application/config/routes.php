@@ -38,12 +38,14 @@
 |
 */
 
-/* frontend */
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['info']='home/info';
 $route['daftar']='home/daftar';
 $route['masuk']='home/masuk';
+$route['materi/beli']='home/beliMateri';
+$route['materi/cart']='home/cart';
+$route['materi/checkout']='home/checkout';
 $route['logout']='home/logout';
 $route['materiku']='member/halaman_materiku';
 $route['materiku/lihat/(:num)'] = 'member/lihatMateri/$1';

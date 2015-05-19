@@ -34,9 +34,11 @@ class Admin extends CI_Controller {
         if (!$this->session->userdata('role'))
             redirect('/guidance/home', 'location');
         $this->load->model('model_admin');
-        $this->load->library('upload');
         $this->load->library('image_lib');
         if ($this->input->post('ganti')) {
+            $config['upload_path'] = './foto/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $this->load->library('upload',$config);
             if (!$this->upload->do_upload('foto')) {
                 $data = $this->upload->data();
                 $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"

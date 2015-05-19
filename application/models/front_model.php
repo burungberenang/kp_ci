@@ -37,5 +37,38 @@ Class front_model extends CI_Model
             return "success";
         }
     }
+    
+    function ambil_paket_terbeli($member){
+        $result = $this->db->query("SELECT p.nama AS 'materi', k.nama AS 'materi1', pkt.id, pkt.nominal, pkt.masaBerlaku FROM paket pkt INNER JOIN materi m ON m.id=pkt.idMateri INNER JOIN pelajaran p ON p.id=m.idPelajaran INNER JOIN kelas k ON k.id=m.idKelas INNER JOIN historybayar hb ON hb.idPaket = pkt.id WHERE hb.idMember = ".$member." AND status = 0");
+        return $result->result_array();
+    }
+    
+    function ambil_foto($member, $paket){
+        $result = $this->db->query("SELECT gambar FROM historybayar WHERE idMember = ".$member." AND idPaket = ".$paket);
+        return $result->row_array();
+    }
+    
+    function cek_member($username, $paket){
+        $member = $this->get_member_id($username);
+        $result = $this->db->query("SELECT * FROM historybayar WHERE idMember = ".$member['id']." AND idPaket = ".$paket);
+        if($result->num_rows()>0) return TRUE;
+        else return FALSE;
+    }
+    
+    function edit_gambar($member, $paket, $gambar){
+        $this->db->trans_start();
+        $this->db->query("UPDATE historybayar SET gambar = '".$gambar."' WHERE idMember = ".$member." AND idPaket = ".$paket);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->close();
+            return "connection_error";
+        }
+        else
+        {
+            $this->db->close();
+            return "success";
+        }
+    }
 } ?>
 

@@ -120,4 +120,84 @@ class Home extends CI_Controller {
         $this->load->view('front/f_foot');
         
     }
+    
+    function bayarMateri(){
+        $this->load->model('front_model');
+        $idMember = $this->front_model->get_member_id($this->session->userdata('username'));
+        $data['materis'] = $this->front_model->ambil_paket_terbeli($idMember['id']);
+        $data['title']="Konfirmasi Pembayaran Materi - A+ Learning Guidance";
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_bayar_materi',$data);
+        $this->load->view('front/f_foot');
+    }
+    
+    function buktiBayar($paket){
+        $this->load->model('front_model');
+        if(!$this->front_model->cek_member($this->session->userdata('username'),$paket)) redirect();
+        $member = $this->front_model->get_member_id($this->session->userdata('username'));
+        $this->load->helper('form');
+        if ($this->input->post('simpan')) {
+            $config['upload_path'] = './asset/transaksi/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('foto')) {
+                $data = $this->upload->data();
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$this->upload->display_errors()."</strong> "
+                            . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('/materi/bayar/'.$paket, 'location');
+            } else {
+                $data = $this->upload->data();
+                
+                // insert database, etc
+
+                $status = $this->front_model->edit_gambar($member['id'], $paket, $data['file_name']);
+
+                if ($status == "success")
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Foto telah berhasil diubah.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/materi/bayar/'.$paket, 'location');
+                }
+                else if ($status == "connection_failed")
+                {
+                    $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Terjadi kesalahan, silahkan coba lagi.</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/materi/bayar/'.$paket, 'location');
+                }
+                else
+                {
+                    $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>".$status."</strong> "
+                            . "</div>";
+                    $this->session->set_flashdata('warning',$warning);
+                    redirect('/materi/bayar/'.$paket, 'location'); 
+                }
+            }
+        }
+        $gambar =  $this->front_model->ambil_foto($member['id'], $paket);
+        if($gambar['gambar']==''){
+            $data['foto'] = 'kosong.png';
+        }else{
+            $data['foto'] = $gambar['gambar'];
+        }
+        $data['idPaket'] = $paket;
+        $data['title']="Upload Bukti Bayar Materi - A+ Learning Guidance";
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_bayar',$data);
+        $this->load->view('front/f_foot');
+    }
 }

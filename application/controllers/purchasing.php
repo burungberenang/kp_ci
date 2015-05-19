@@ -13,10 +13,18 @@ class Purchasing extends CI_Controller {
         if($this->session->userdata('role')!=1) redirect ('guidance/login','location');
         if($this->input->post('ubah')){
             $id = $this->input->post('id');
-            $status = $this->model_purchasing->ambil_status_histori($id)->status;
-            if($status==0) $status=1;
-            else $status=0;
-            $this->model_purchasing->ubah_histori($id, $status);
+            $temp = $this->model_purchasing->ambil_status_paket_histori($id);
+            $status = $temp->status;
+            
+            if($status==0){
+                $status=1;
+                $paket = $this->model_purchasing->ambil_masa_berlaku_paket($temp->idPaket)->masaBerlaku;
+            }
+            else{
+                $status=0;
+                $paket = 0;
+            }
+            $this->model_purchasing->ubah_histori($id, $status, $paket);
             redirect('guidance/transaksi','location');
         }
         $data['title']='Lihat Histori Transaksi A+ Learning';

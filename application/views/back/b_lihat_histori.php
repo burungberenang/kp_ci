@@ -28,7 +28,7 @@
                                         <?php foreach ($histori as $value): ?>
                                             <tr>
                                                 <td><?php echo $value['tanggal'];?></td>
-                                                <td><img src ="<?php echo base_url().'asset/transaksi/'.$value['gambar'];?>"/></td>
+                                                <td><img width="40%" src ="<?php echo base_url().'asset/transaksi/'.$value['gambar'];?>"/></td>
                                                 <td><?php echo $value['tanggalNonAktif'];?></td>
                                                 <td><?php echo $value['member'];?></td>
                                                 <td><?php echo $value['paket'];?></td>

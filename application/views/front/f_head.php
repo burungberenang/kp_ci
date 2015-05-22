@@ -57,9 +57,9 @@
                         
                     <?php endif; ?>
                         <li>
-                            <form class="navbar-form navbar-right" role="search">
+                            <form class="navbar-form navbar-right" role="search" action="<?php echo site_url(); ?>/cari" method="get">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Kode Materi">
+                                    <input type="text" name="cari" class="form-control" placeholder="Cari Materi">
                                 </div>
                                 <button type="submit" class="btn btn-default">Cari</button>
                             </form>

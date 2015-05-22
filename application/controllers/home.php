@@ -17,6 +17,20 @@ class Home extends CI_Controller {
         $this->load->view('front/f_foot');
     }
     
+    function cari(){
+        $this->load->helper('text');
+        $data['cari'] = $this->input->get('cari');
+        $cari = str_replace(" ","%", $this->input->get('cari'));
+        $this->load->model('front_model');
+        
+        $data['hasil'] = $this->front_model->ambil_hasil_pencarian($cari);
+        
+        $data['title']="Cari - A+ Learning Guidance";
+        $this->load->view('front/f_head',$data);
+        $this->load->view('front/f_cari',$data);
+        $this->load->view('front/f_foot');
+    }
+    
     function info(){
         $data['title']="Info - A+ Learning Guidance";
         $this->load->view('front/f_head',$data);

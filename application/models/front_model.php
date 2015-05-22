@@ -70,5 +70,10 @@ Class front_model extends CI_Model
             return "success";
         }
     }
+    
+    function ambil_hasil_pencarian($cari){
+        $result = $this->db->query("SELECT b.id, s.nama, s.deskripsi FROM subbab s INNER JOIN bab b ON b.id=s.idBab WHERE s.nama LIKE '%".$cari."%' OR s.deskripsi LIKE '%".$cari."%' OR b.nama LIKE '%".$cari."%' ");
+        return $result->result_array();
+    }
 } ?>
 

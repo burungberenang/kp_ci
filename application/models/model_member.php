@@ -215,7 +215,7 @@ class Model_member extends CI_Model {
     function ambilsemuabab($idMateri){
         $sql = " SELECT m.id as idMateri, b.nama as namaBab, b.id as idBab "
                 . " FROM materi m "
-                . " INNER JOIN bab b ON m.idPelajaran = b.id "
+                . " INNER JOIN bab b ON m.id = b.idMateri "
                 . " WHERE m.id = ? ";
         
         $this->load->database('default');

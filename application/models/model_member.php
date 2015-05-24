@@ -249,4 +249,25 @@ class Model_member extends CI_Model {
             return false;
         }
     }
+    
+    function ambilhakakses($idMember, $idBab){
+        $sql = " SELECT * FROM bab b "
+                . " INNER JOIN materi m ON b.idMateri = m.id "
+                . " INNER JOIN paket p ON m.id = p.idMateri "
+                . " INNER JOIN historybayar hb ON hb.idPaket = p.id "
+                . " INNER JOIN member mb ON mb.id = hb.idMember"
+                . " WHERE b.id = ? AND mb.username = ? AND hb.tanggalNonAktif > NOW()";
+        
+        $this->load->database('default');
+        $row = $this->db->query($sql,array($idBab, $idMember));
+        
+        if ($row->num_rows() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

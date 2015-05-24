@@ -19,6 +19,12 @@ class Member extends CI_Controller {
         $data['databab'] = $this->model_member->ambildetailbab($idBab);
         $data['datasubbab'] = $this->model_member->ambilsemuasubbab($idBab);
         
+        if ($this->session->userdata('username')) {
+            $data['hakakses'] = $this->model_member->ambilhakakses($this->session->userdata('username'),$idBab);
+        } else {
+            $data['hakakses'] = false;
+        }
+
         $this->load->view('front/f_head',$data);
         $this->load->view('front/f_detail_bab_new');
         $this->load->view('front/f_foot');
@@ -59,7 +65,17 @@ class Member extends CI_Controller {
         $this->load->model('model_member');
         
         $data['dataku'] = $this->model_member->ambildetailuser($this->session->userdata('username'));
-        $data['datamateri'] = $this->model_member->ambilmateriuser($this->session->userdata('username'));
+        $datamateriku = $this->model_member->ambilmateriuser($this->session->userdata('username'));
+        $databab = array();
+        
+        if ($datamateriku){
+            foreach ($datamateriku->result() as $row1){
+                $databab[$row1->idMateri] = $this->model_member->ambilsemuabab($row1->idMateri);
+            }
+        }
+        
+        $data['datamateri'] = $datamateriku;
+        $data['databab'] = $databab;
         
         $this->load->view('front/f_head',$data);
         $this->load->view('front/f_materiku');

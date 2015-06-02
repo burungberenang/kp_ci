@@ -11,10 +11,101 @@ class Home extends CI_Controller {
     
     
     function index(){
+        $this->load->model('front_model');
+        $this->load->library('form_validation');
         $data['title']="Beranda - A+ Learning Guidance";
+        $data['produk'] = $this->front_model->ambil_produk_terlaris();
         $this->load->view('front/f_head',$data);
         $this->load->view('front/f_body');
         $this->load->view('front/f_foot');
+    }
+    
+    function contactus(){
+        
+        //load helper
+        $this->load->helper(array('url'));
+        $this->load->library('form_validation');
+        
+        //load model
+        $this->load->model('front_model');
+        
+        //set validation rules and message
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+	$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+	$this->form_validation->set_rules('pesan', 'Pesan', 'required');
+        
+        $this->form_validation->set_message('required','%s harus diisi');
+        $this->form_validation->set_message('valid_email','Masukkan email yang valid');
+
+        //do something here
+	if ($this->form_validation->run() == FALSE)
+	{
+            $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>".$this->upload->display_errors()."</strong> "
+                        . "</div>";
+            $this->session->set_flashdata('warning',$warning);
+            redirect('','location');
+	}
+        else
+	{
+            // insert database, etc
+            $data['nama']= $this->input->post('nama');
+            $data['email']= $this->input->post('email');
+            $data['pesan'] = $this->input->post('pesan');
+
+            // send email
+            //$message = "<html><body>Dear ".$data['name'].",<br/> We already received your message and we'll reply you soon within 24 hours. Thank you</body></html> ";
+
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' =>'ssl://smtp.gmail.com',
+                'smtp_user' =>'oneweb.noreply@gmail.com',
+                'smtp_pass' =>'cobatryuntukforoneweb',
+                'smtp_port' => '465',
+                'mailtype' =>'html',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE);
+
+            $message = '<html><body>You got a new Message. Please check and reply immediately<br/><br/>'
+                    . '<strong>Message Detail:</strong><br/>'
+                    . 'Customer Name:'.$data['nama'].' <br/>'
+                    . 'Email: '.$data['email'].'<br/>'
+                    . 'Message: '.$data['pesan'].'<br/>'
+                    . '</body>'
+                    . '</html>' ;
+
+            $this->load->library('email');
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('oneweb.noreply@gmail.com');
+            $this->email->to('oneweb.noreply@gmail.com');// change it to yours
+            $this->email->subject('A+ Learning Guidance - Pesan Baru');
+            $this->email->message($message);
+            
+            if(!$this->email->send()){
+                //echo $this->email->print_debugger();
+                //exit;
+                $warning = "<div class='alert alert-warning alert-dismissible' role='alert'>"
+                        . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                        . "<span class='sr-only'>Close</span>"
+                        . "</button><strong>Email gagal terkirim</strong> "
+                        . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('','location');
+            }else
+            {
+                // redirect to contact page + notification
+                $warning = "<div class='alert alert-success alert-dismissible' role='alert'>"
+                            . "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span>"
+                            . "<span class='sr-only'>Close</span>"
+                            . "</button><strong>Pesan telah berhasil dikirim</strong> "
+                            . "</div>";
+                $this->session->set_flashdata('warning',$warning);
+                redirect('', 'location');
+            }
+	}
     }
     
     function cari(){

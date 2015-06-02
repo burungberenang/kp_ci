@@ -75,5 +75,10 @@ Class front_model extends CI_Model
         $result = $this->db->query("SELECT b.id, s.nama, s.deskripsi FROM subbab s INNER JOIN bab b ON b.id=s.idBab WHERE s.nama LIKE '%".$cari."%' OR s.deskripsi LIKE '%".$cari."%' OR b.nama LIKE '%".$cari."%' ");
         return $result->result_array();
     }
+    
+    function ambil_produk_terlaris(){
+        $result = $this->db->query("SELECT p.nama, pl.nama as 'materi2', k.nama as 'materi1', COUNT(*) as 'jumlah', h.idPaket FROM paket p INNER JOIN historybayar h ON h.idPaket = p.id INNER JOIN materi m ON m.id = p.idMateri INNER JOIN pelajaran pl ON pl.id = m.idPelajaran INNER JOIN kelas k ON k.id = m.idKelas GROUP BY h.idPaket ORDER BY jumlah DESC LIMIT 3");
+        return $result->result_array();
+    }
 } ?>
 

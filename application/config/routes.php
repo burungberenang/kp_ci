@@ -55,6 +55,7 @@ $route['materi/lihat/(:num)'] = 'member/materi/$1';
 $route['materiku/bab/(:num)'] = 'member/lihatBab/$1';
 $route['materi/(:num)'] = 'member/kelas/$1';
 $route['cari'] = 'home/cari';
+$route['contact'] = 'home/contactus';
 /* -------------*/
 
 $route['guidance/login']='admin/halaman_login';

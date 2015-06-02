@@ -430,11 +430,6 @@ class Model_material extends CI_Model {
         }
     }
     
-    function next_id_materi(){
-        $result = $this->db->query("SELECT auto_increment as 'nextId' FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'materi' AND TABLE_SCHEMA = 'a_plus_learning'");
-        return $result->row();
-    }
-    
     function cek_materi($pelajaran, $kelas){
         $result = $this->db->query("SELECT * FROM materi WHERE idPelajaran = '".$pelajaran."' AND idKelas = '".$kelas."' ");
         if($result->num_rows() > 0) return FALSE;

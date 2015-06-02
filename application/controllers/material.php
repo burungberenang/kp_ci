@@ -937,7 +937,6 @@ class Material extends CI_Controller {
             
             $data['pilihanp'] =  $this->model_material->ambil_pelajaran();
             $data['pilihank'] =  $this->model_material->ambil_kelas();
-            $data['idMateri'] =  $this->model_material->next_id_materi();
             
             $this->load->view('back/b_header',$data);
             $this->load->view('back/b_tambah_materi',$data);

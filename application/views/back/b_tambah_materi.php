@@ -22,7 +22,7 @@
                             ?>
                             <div class="widget-content">
                                 <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post">
-                                    <input type="hidden" name="id" value="<?php if($temp) echo $temp['id']; else echo $idMateri->nextId; ?>"/>
+                                    <input type="hidden" name="id" value="<?php if($temp) echo $temp['id'];?>"/>
                                     <div class="form-group">
                                         <label class="control-label">Kelas:</label>
                                         <div class="controls">

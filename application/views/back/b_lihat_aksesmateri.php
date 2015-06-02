@@ -4,7 +4,8 @@
             </div>
             <div id="breadcrumb">
                 <a href="#" title="Go to Home" class="tip-bottom"><i class="glyphicon glyphicon-home"></i> Home</a>
-                <a href="#" class="tip-bottom">Materi <?php echo $datamateri->nama; ?></a>
+                <a href="#" class="tip-bottom">Hak Akses Materi</a>
+                <a href="#" class="tip-bottom">Lihat Hak Akses Materi</a>
             </div>
             <div class="container-fluid">
                 <div class="row">

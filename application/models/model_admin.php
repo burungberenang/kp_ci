@@ -243,4 +243,30 @@ class Model_admin extends CI_Model {
             return "success";
         }
     }
+    
+    function ambil_total_user(){
+        $this->load->database('default');
+        $result = $this->db->query("SELECT COUNT(*) as 'jumlah' FROM Member");
+        return $result->row();
+    }
+    
+    function ambil_total_materi(){
+        $this->load->database('default');
+        $result = $this->db->query("SELECT COUNT(*) as 'jumlah' FROM Materi");
+        return $result->row();
+    }
+    
+    function ambil_total_pendapatan(){
+        $this->load->database('default');
+        $result = $this->db->query("SELECT SUM(p.nominal) as 'jumlah' FROM historybayar h INNER JOIN paket p ON p.id = h.idPaket AND h.status=1");
+        return $result->row();
+    }
+    
+    function ambil_total_pendapatan_bulan(){
+        $this->load->database('default');
+        $result = $this->db->query("SELECT SUM(p.nominal) as 'jumlah' FROM historybayar h INNER JOIN paket p ON p.id = h.idPaket WHERE MONTH(h.tanggal)=MONTH(NOW())-1 AND YEAR(h.tanggal)=YEAR(NOW()) AND h.status=1");
+        if($result->num_rows()>0)
+        return $result->row();
+        else return 0;
+    }
 }

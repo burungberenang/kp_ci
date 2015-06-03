@@ -736,7 +736,14 @@ class Admin extends CI_Controller {
         }
         else if ($this->session->userdata('role') != '4') // not normal member
         {
-            $this->session->set_flashdata('home',true);     
+            $this->session->set_flashdata('home',true);
+            if($this->session->userdata('role')==1){
+                $this->load->model('model_admin');
+                $data['jumlahuser'] = $this->model_admin->ambil_total_user()->jumlah;
+                $data['jumlahmateri'] = $this->model_admin->ambil_total_materi()->jumlah;
+                $data['jumlahpendapatan'] = $this->model_admin->ambil_total_pendapatan()->jumlah;
+                $data['jumlahpendapatanperbulan'] = $this->model_admin->ambil_total_pendapatan_bulan()->jumlah;
+            }
             $this->load->view('back/b_header',$data);
             $this->load->view('back/b_backend');
             $this->load->view('back/b_footer'); 

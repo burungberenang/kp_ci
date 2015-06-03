@@ -46,12 +46,12 @@
                                     <li>BCA 731.123.123</li>
                                     <li>MANDIRI 102.432.123</li>
                                 </ul>
-                                <p>Kemudian lakukan konfirmasi SMS ke nomor 08973803263</p>
-                                <p>Dengan format: PAKET [nominal] [bank dituju] [rekening pengirim]</p>
-                                <p>Contoh: PAKET 90000 BCA 102.423.123</p>
+                                <p>Setelah transfer, simpan bukti transfer dan upload softcopy ke dalam menu <a href="<?php echo site_url(); ?>/materi/bayar">Konfirmasi</a></p>
+                                <p>Tunggu konfirmasi dari admin</p>
+                                <p>Jika sudah terkonfirmasi, maka materi dapat diakses dari menu <a href="<?php echo site_url() ?>/materiku">Materiku</a></p>
                                 <br>
                                 <form method="post" action="<?php echo current_url(); ?>">
-                                    <h4>Lanjut?</h4><input type="submit" name="submit" value="Ok" class="btn btn-lg btn-primary">
+                                    <h4>Anda yakin?</h4><input type="submit" name="submit" value="Ok" class="btn btn-lg btn-primary">
                                 </form>
                                 
                             </div>

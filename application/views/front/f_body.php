@@ -8,13 +8,13 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="first-slide" src="<?php base_url() ?>asset/images/1.jpg" alt="First slide">
+                <img class="first-slide" src="<?php echo base_url() ?>asset/images/1.jpg" alt="First slide">
             </div>
             <div class="item">
-                <img class="second-slide" src="<?php base_url() ?>asset/images/2.jpg" alt="Second slide">
+                <img class="second-slide" src="<?php echo  base_url() ?>asset/images/2.jpg" alt="Second slide">
             </div>
             <div class="item">
-                <img class="third-slide" src="<?php base_url() ?>asset/images/3.jpg" alt="Third slide">
+                <img class="third-slide" src="<?php echo base_url() ?>asset/images/3.jpg" alt="Third slide">
             </div>
         </div>
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
